@@ -1,0 +1,13 @@
+.wrap {
+    display: grid;
+    place-items: center;
+    grid-template-rows: 70px 50px 1fr;
+    // grid-template-columns: minmax(600px, 1fr);
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: start;
+    row-gap: 10px;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}

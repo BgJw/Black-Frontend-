@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+$primary-color: #3498db;
+$second-color: black;
+$font-size: 14px;
+$cell-width: 130px; 
+$cell-max-width: 140px; 
+$cell-min-width: 90px; 
+
+
+
+*{
+    text-decoration: none;
+    list-style-type: none;
+}
+.cell {
+    width: $cell-width;
+    max-width: $cell-max-width;
+    min-width: $cell-min-width;
+    font-size: $font-size;
+    border: 1px solid black;
+    text-align: center;
+
+}
+body{
+    position: relative;
+    margin-top: 69px;
+}
+.position {
+    display: grid;
+    grid-template-columns: minmax(100px, 160px) 1fr;
+}
+
+
+@media screen and (max-width: 768px) {
+    .cell {
+        width: $cell-width - 20;
+        max-width: $cell-max-width - 20;
+        min-width: $cell-min-width - 20;
+    }
+  }
