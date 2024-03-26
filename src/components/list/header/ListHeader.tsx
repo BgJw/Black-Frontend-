@@ -1,7 +1,7 @@
 'use client'
 
 import { useAppDispatch, useAppSelector } from "@/components/hooks/store";
-import { nextDay, prevDay } from "../../../../slices/listSlice";
+import { nextDay, prevDay } from "../../../slices/listSlice";
 
 
 const ListHeader = () => {

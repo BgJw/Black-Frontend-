@@ -1,11 +1,11 @@
 import { useAppDispatch, useAppSelector } from "@/components/hooks/store";
 import { forwardRef, useState } from "react";
-import { IEmployees, IWorkTime } from "../../../../slices/types";
+import { IEmployees, IWorkTime } from "../../../slices/types";
 import { getDayOfWeek } from "@/helpers/isWeekend";
 import { changeMonthWorkTime } from "@/app/api/employee";
-import { updateMonth } from "../../../../slices/scheduleSlice";
+import { updateMonth } from "../../../slices/scheduleSlice";
 import useModal from "@/components/hooks/useModal";
-import { update } from "../../../../slices/notificationSlice";
+import { update } from "../../../slices/notificationSlice";
 
 const AutomaticTimeFilling = forwardRef<HTMLButtonElement>((props, ref) => {
     const { dayList, month, year } = useAppSelector(state => state.scheduleSlice);

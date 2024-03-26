@@ -1,6 +1,6 @@
 'use client'
 import { useAppDispatch, useAppSelector } from "@/components/hooks/store";
-import { nextMonth, prevMonth } from '../../../../slices/scheduleSlice';
+import { nextMonth, prevMonth } from '../../../slices/scheduleSlice';
 
 const Header = () => {
     const { month, year } = useAppSelector(store => store.scheduleSlice);
@@ -8,7 +8,7 @@ const Header = () => {
 
 
     return (
-            <header className="flex w-1/2 justify-between items-center">
+            <header className="flex md:w-1/2 justify-between items-center md:text-base text-xs" >
                 <button
                     className="hover:opacity-70"
                     onClick={() => dispatch(prevMonth())}>

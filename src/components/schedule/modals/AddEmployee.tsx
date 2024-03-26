@@ -1,9 +1,9 @@
 import React, { useState, useRef, Dispatch, SetStateAction } from 'react';
 import { addNewEmployee } from '@/app/api/employee';
 import { useAppDispatch, useAppSelector } from '@/components/hooks/store';
-import { updateMonth } from '../../../../slices/scheduleSlice';
+import { updateMonth } from '../../../slices/scheduleSlice';
 import CreateEmployee from '@/components/newMonth/CreateEmployee';
-import { update } from '../../../../slices/notificationSlice';
+import { update } from '../../../slices/notificationSlice';
 
 interface IModal {
   changeModal: Dispatch<SetStateAction<boolean>>

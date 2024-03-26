@@ -1,12 +1,9 @@
+import { ChangeEventHandler } from "react";
 
 interface IMyInput {
     name: string,
     value: string,
-    onChange: (e: {
-        target: {
-            value: React.SetStateAction<string>;
-        };
-    }) => void
+    onChange: ChangeEventHandler<HTMLInputElement>
 }
 
 const MyInput = ({ name, onChange, value }: IMyInput) => {

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useAppDispatch, useAppSelector } from '@/components/hooks/store';
-import { fetchMonth, updateMonth } from '../../../slices/scheduleSlice';
+import { fetchMonth } from '../../slices/scheduleSlice';
 
 const useFetchMonth = () => {
   const { year, month } = useAppSelector(store => store.scheduleSlice);

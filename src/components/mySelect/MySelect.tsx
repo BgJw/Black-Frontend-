@@ -1,13 +1,9 @@
-import React from "react";
+import React, { ChangeEventHandler } from "react";
 
 interface IMySelect {
   name: string;
   options: any[];
-  onChange: (e: {
-    target: {
-      value: React.SetStateAction<string>;
-    };
-  }) => void;
+  onChange:  ChangeEventHandler<HTMLSelectElement>;
 }
 const MySelect = ({ name, options, onChange }: IMySelect) => {
   return (

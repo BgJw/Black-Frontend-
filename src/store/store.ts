@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import scheduleSlice from '../slices/scheduleSlice';
-import listSlice from '../slices/listSlice';
-import notificationSlice from '../slices/notificationSlice';
-import ordersSlice from '../slices/ordersSlice';
+import listSlice from '@/slices/listSlice';
+import notificationSlice from '@/slices/notificationSlice';
+import scheduleSlice from '@/slices/scheduleSlice';
+import ordersSlice from '@/slices/ordersSlice';
+
 
 const store = configureStore({
     reducer: {

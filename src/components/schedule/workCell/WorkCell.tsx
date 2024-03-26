@@ -1,18 +1,16 @@
 'use client'
 import { Tooltip } from "@material-tailwind/react";
-import { IWorkTime } from "../../../../slices/types";
-
+import { IWorkTime } from "../../../slices/types";
 import React, { useState } from "react";
 import { addWorkDay, changeTime } from "@/app/api/employee";
 
-import { updateMonth } from "../../../../slices/scheduleSlice";
+import { updateMonth } from "../../../slices/scheduleSlice";
 import { useAppDispatch, useAppSelector } from "@/components/hooks/store";
-import { getDayOfWeek, isWeekend } from "@/helpers/isWeekend";
+import { update } from "../../../slices/notificationSlice";
 
 
 
 import s from './WorkCell.module.scss';
-import { update } from "../../../../slices/notificationSlice";
 
 
 interface IWorkCell {
@@ -30,7 +28,6 @@ const WorkCell = React.memo(({ workTime, employeeId, monthId, emptyDay }: IWorkC
     const dispatсh = useAppDispatch();
 
     const isValid = (str: string): boolean => /^(L4|U|-|(\d{1,2})-(\d{1,2}))$/i.test(str);
-    const dayOfWeek = getDayOfWeek(year, month.numb, emptyDay);
     
 
     const fetchTime = async (value: string) => {
@@ -77,27 +74,27 @@ const WorkCell = React.memo(({ workTime, employeeId, monthId, emptyDay }: IWorkC
         }
     };
 
+    const errorBorder = !disabled ? ' border border-red-300 rounded-lg ': ' rounded-none ';
 
     return (
-        <div
-            className={s.cell + ' cell relative'}
-            style={isWeekend(dayOfWeek)}>
+        <td
+            className={s.hover + ' px-6 py-4 relative' + errorBorder}>
             <input
                 type="text"
                 value={value.toUpperCase()}
                 onChange={e => setValue(e.target.value)}
                 disabled={disabled}
-                className={s.input}
+                className={s.input + ' bg-transparent text-center w-full'}
                 onKeyUp={e => handleKeyUp(e)}
             />
             <Tooltip content="Zminenić czas" className="border rounded-md border-blue-gray-50 bg-white px-2 py-2 shadow-xl shadow-black/10 text-black text-xs">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
-                    className="w-3 h-3 absolute inset-y-1 right-2 cursor-pointer opacity-20 hover:opacity-100"
+                    className="w-3.5 h-3.5 absolute inset-y-1 right-2 cursor-pointer opacity-25 "
                     onClick={handleTooltipClick}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
             </Tooltip>
-        </div>
+        </td>
     )
 });
 

@@ -1,6 +1,6 @@
 "use client"
 import { Tooltip } from "@material-tailwind/react";
-import { resetMonth } from "../../../../slices/scheduleSlice";
+import { resetMonth } from "../../../slices/scheduleSlice";
 import { useAppDispatch } from "@/components/hooks/store";
 import dynamic from "next/dynamic";
 import useModal from "@/components/hooks/useModal";

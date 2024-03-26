@@ -1,5 +1,5 @@
 import React from 'react';
-import { IEmployees } from '../../../slices/types';
+import { IEmployees } from '../../slices/types';
 
 const ListsNewEmployee = ({ employee, removeEmployee }: { employee: Partial<IEmployees>[], removeEmployee: (index: number) => void }) => {
     return (

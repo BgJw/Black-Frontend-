@@ -1,4 +1,4 @@
-import { IPersonel } from "../../../../slices/types";
+import { IPersonel } from "../../../slices/types";
 import { ApiResponse, handleApiRequest } from "../handleApiRequest";
 
 

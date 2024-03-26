@@ -23,7 +23,6 @@ export enum Status {
     error = 'error'
 }
 export interface ScheduleSlice {
-    dayList: number[],
     year: number,
     month: {
         name: string,

@@ -1,9 +1,9 @@
 import { useAppDispatch, useAppSelector } from '@/components/hooks/store';
 import { useState, useRef, Dispatch, SetStateAction } from 'react';
-import { IEmployees } from '../../../../slices/types';
+import { IEmployees } from '../../../slices/types';
 import { removeEmployee } from '@/app/api/employee';
-import { updateMonth } from '../../../../slices/scheduleSlice';
-import { update } from '../../../../slices/notificationSlice';
+import { updateMonth } from '../../../slices/scheduleSlice';
+import { update } from '../../../slices/notificationSlice';
 
 const EmployeeDeleteModal = ({ changeModal }: { changeModal: Dispatch<SetStateAction<boolean>> }) => {
   const [selectedEmployee, setSelectedEmployee] = useState<IEmployees | null>(null);

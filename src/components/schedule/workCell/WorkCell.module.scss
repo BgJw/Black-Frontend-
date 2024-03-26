@@ -1,9 +1,11 @@
+.hover:hover{
+    svg{
+        opacity: 1;
+    }
+}
+
 .input{
-
-    text-align: center;
-    width: 100%;
-
-    &:not(:disabled){
-        background-color: rgb(255, 0, 0);  
+    &:focus{
+        outline: none;
     }
 }

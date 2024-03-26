@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/store";
-import { removeText } from "../../../slices/notificationSlice";
+import { removeText } from "../../slices/notificationSlice";
 
 const Notification = () => {
     const message = useAppSelector(state => state.notificationSlice.text);
@@ -18,7 +18,7 @@ const Notification = () => {
                 // Завершаем анимацию и удаляем текст
                 setAnimation(false);
                 dispatch(removeText());
-            }, 3000);
+            }, 2500);
         }
 
         return () => clearTimeout(timer);
@@ -28,8 +28,8 @@ const Notification = () => {
         <>
             {message.length > 0 && (
                 <div
-                    className={`fixed right-3 w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-400 z-50 transition-all  ${
-                        animation ? 'top-36' : 'top-0'
+                    className={`fixed right-3 w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-400 z-50 transition-all duration-1000  ${
+                        animation ? 'top-20' : 'top-0'
                     }`}
                     role="alert"
                 >

@@ -1,25 +1,26 @@
 // Shift + Alt + F
 // rafc
 'use client'
-import { useState } from "react";
+import { Quantity } from "../quantity/Quantity";
+import { ISelectedItem } from "@/app/orders/page";
 
-const SelectedItem = ({item}: {item: string}) => {
-    const [weight, setWeight] = useState("");
+
+interface ISelectedItemProps {
+  item: ISelectedItem;
+  increaseItemCount: (id: number, quantity: string) => void;
+}
+
+
+const SelectedItem = ({item, increaseItemCount}: ISelectedItemProps) => {
+
     
   return (
-    item === "pranie + magieł" ? (
-        <div className="flex items-center gap-x-2">
-          P+M
-          <input
-            placeholder="kg"
-            className="ml-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1"
-            onChange={(e) => setWeight(e.target.value)}
-            value={weight}
-          />
-        </div>
-      ) : (
-        <div>{item}</div>
-      )
+    <div className="flex items-center">
+      {
+        item.name
+      }
+        <Quantity increaseItemCount={increaseItemCount} id={item.id}/>
+    </div>
   )
 }
 

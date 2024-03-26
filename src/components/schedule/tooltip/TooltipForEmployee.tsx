@@ -1,11 +1,12 @@
 import { Tooltip } from "@material-tailwind/react";
-import { IEmployees } from "../../../../slices/types";
+import { IEmployees } from "../../../slices/types";
 import React, { useState } from "react";
-import { useAppSelector } from "@/components/hooks/store";
+import useDaysArrayInMonth from "@/components/hooks/useDaysArrayInMonth";
 
 
 const TooltipWithHelperIcon = React.memo(({ employee }: { employee: IEmployees }) => {
-    const days = useAppSelector(state => state.scheduleSlice.dayList);
+
+    const days = useDaysArrayInMonth();
     const [information, setInformation] = useState({
         name: employee.name || 'NaN',
         position: employee.position || 'NaN',

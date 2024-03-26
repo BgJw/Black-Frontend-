@@ -1,4 +1,4 @@
-import { IEmployees } from "../../../../slices/types";
+import { IEmployees } from "../../../slices/types";
 import { handleApiRequest } from "../handleApiRequest";
 
 const apiUrl = "http://localhost:5000/employees/";
