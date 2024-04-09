@@ -24,7 +24,6 @@ import { update } from "@/slices/notificationSlice";
 
 export const SubmitForm = ({newOrder,  resetAll}: {newOrder: IList, resetAll: () => void}) => {
   const dispatch = useAppDispatch();
-  const isWeight = newOrder.whatReceived.find( item => item.name === 'pranie + magieł') 
 
     const sendDate = (newOrder: IList) => {
       const {dateReceived, whatReceived, customerNumber, receivedBy, amountToPay, paid, cardOrCash, hour, forWhen, whoMadeIt } = newOrder
