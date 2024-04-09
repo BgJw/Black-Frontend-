@@ -28,7 +28,7 @@ const hours = [
   "20:00",
 ];
 
-export const paymendMethode = [PaidMethod.Card, PaidMethod.Cash, PaidMethod.DoPay];
+export const paymendMethode = ['Gotówka', 'Karta', 'Do zapłaty'];
 
 const listDates = getDates(new Date(), 30);
 
