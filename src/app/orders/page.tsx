@@ -9,7 +9,7 @@ import SelectForm from "@/components/orders/selectForm/SelectForm";
 import { SubmitForm } from "@/components/orders/submitForm/SubmitForm";
 import { TotalPrice } from "@/components/orders/totalPrice/TotalPrice";
 import { getDates } from "@/helpers/isWeekend";
-import { useCallback, useState } from "react";
+import { FC, useCallback, useState } from "react";
 
 
 export enum PaidMethod {
@@ -45,7 +45,7 @@ export interface ISelectedItem {
 };
 
 
-const Orders = () => {
+export const Orders: FC = () => {
   const clientNumber = useAppSelector((state) => state.ordersSlice.customerNumber);
 
   const [customerNumber, setCustomerNumber] = useState(
