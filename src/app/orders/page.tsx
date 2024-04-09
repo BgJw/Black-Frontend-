@@ -1,4 +1,5 @@
 "use client";
+
 import { useAppSelector } from "@/components/hooks/store";
 import MyInput from "@/components/myInput/MyInput";
 import MySelect from "@/components/mySelect/MySelect";
@@ -10,7 +11,7 @@ import { SubmitForm } from "@/components/orders/submitForm/SubmitForm";
 import { TotalPrice } from "@/components/orders/totalPrice/TotalPrice";
 import { getDates } from "@/helpers/isWeekend";
 import { FC, useCallback, useState } from "react";
-import { PaidMethod } from "../api/order";
+import { ISelectedItem, PaidMethod } from "../api/order";
 
 
 const hours = [
@@ -28,16 +29,10 @@ const hours = [
   "20:00",
 ];
 
-export const paymendMethode = ['Gotówka', 'Karta', 'Do zapłaty'];
+const paymendMethode = ['Gotówka', 'Karta', 'Do zapłaty'];
 
 const listDates = getDates(new Date(), 30);
 
-export interface ISelectedItem {
-  id: number;
-	price: string;
-  name: string;
-	numb: string;
-};
 
 
 const Orders: FC = () => {

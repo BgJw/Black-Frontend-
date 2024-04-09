@@ -1,11 +1,16 @@
-import { ISelectedItem } from "@/app/orders/page";
 import { ApiResponse, SERVER_PORT, handleApiRequest } from "../handleApiRequest";
 
 
 
 const apiUrl = `${SERVER_PORT}/orders/`;
 
-
+export interface ISelectedItem {
+    id: number;
+      price: string;
+    name: string;
+      numb: string;
+  };
+  
 
 export enum PaidMethod {
     Cash = "Gotówka",
