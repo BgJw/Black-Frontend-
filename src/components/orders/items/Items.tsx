@@ -1,4 +1,4 @@
-import { ISelectedItem } from "@/app/orders/page";
+import { ISelectedItem } from "@/app/api/order";
 import SelectedItem from "../selectedItem/SelectedItem"
 import { memo } from "react";
 

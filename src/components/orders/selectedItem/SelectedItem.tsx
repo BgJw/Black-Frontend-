@@ -1,8 +1,8 @@
 // Shift + Alt + F
 // rafc
 'use client'
+import { ISelectedItem } from "@/app/api/order";
 import { Quantity } from "../quantity/Quantity";
-import { ISelectedItem } from "@/app/orders/page";
 
 
 interface ISelectedItemProps {
