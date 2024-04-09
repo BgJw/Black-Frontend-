@@ -20,7 +20,7 @@ export const authConfig: AuthOptions = {
         }
 
         try {
-          const response = await fetch("http://localhost:5000/auth", {
+          const response = await fetch("https://black-backend-production.up.railway.app/auth", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
