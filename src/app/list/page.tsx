@@ -6,8 +6,6 @@ import ListTitle from '@/components/list/listTitle/ListTitle';
 
 import s from './list.module.scss';
 import { useEffect, useState } from 'react';
-import { useAppSelector } from '@/components/hooks/store';
-import { log } from 'console';
 import { SERVER_PORT } from '../api/handleApiRequest';
 
 enum payMetod {

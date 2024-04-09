@@ -45,7 +45,7 @@ export interface ISelectedItem {
 };
 
 
-export const Orders: FC = () => {
+const Orders: FC = () => {
   const clientNumber = useAppSelector((state) => state.ordersSlice.customerNumber);
 
   const [customerNumber, setCustomerNumber] = useState(
