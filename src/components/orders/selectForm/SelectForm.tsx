@@ -1,5 +1,5 @@
-import { ISelectedItem } from "@/app/orders/page";
-import { ChangeEventHandler, memo, useCallback, useState } from "react";
+import { ISelectedItem } from "@/app/api/order";
+import { ChangeEventHandler, memo, useCallback } from "react";
 
 const listThings = [
     {
