@@ -34,6 +34,11 @@ body{
     grid-template-columns: minmax(100px, 160px) 1fr;
 }
 
+.input-error {
+    border: 1px solid red; /* Пример стиля для рамки */
+    background-color: #ffcccc; /* Пример стиля для фона */
+}
+
 
 @media screen and (max-width: 768px) {
     .cell {

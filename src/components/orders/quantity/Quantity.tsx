@@ -52,7 +52,7 @@ const incrementFloatNumber = (numb: string) => {
           id="decrement-button"
           data-input-counter-decrement="quantity-input"
           className="bg-gray-100 :bg-gray-700 hover:bg-gray-200 border border-gray-300 rounded-s-lg px-3 h-5 focus:ring-gray-100 focus:ring-2 focus:outline-none"
-          onClick={ () => setQuantity(decrementFloatNumber(quantity))}
+          onClick={ () => +quantity > 0 && setQuantity(decrementFloatNumber(quantity))}
         >
           <svg
             className="w-3 h-3 text-gray-900"

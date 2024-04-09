@@ -3,6 +3,9 @@ export interface ApiResponse {
      message: string
 };
 
+
+export const SERVER_PORT = "https://black-backend-production.up.railway.app";
+
 const handleResponse = async (response: Response): Promise<ApiResponse> => {
     if (!response.ok) {
       const errorData = await response.json();

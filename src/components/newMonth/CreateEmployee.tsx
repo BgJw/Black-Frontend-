@@ -28,18 +28,18 @@ const CreateEmployee = ({ addEmployee, setShow }: ICreateEmployee) => {
         <form onSubmit={handleSubmit} className='flex flex-col'>
             <div className="grid gap-4 mb-2 md:grid-cols-2">
                 <div>
-                    <MyInput name={'Imię:'} onChange={ (e) => setFirstName(e.target.value) } value={firstName} />
+                    <MyInput name={'Imię:'} setValue={ setFirstName } value={firstName} />
                 </div>
                 <div>
-                    <MyInput name={'Nazwisko:'} onChange={ (e) => setLastName(e.target.value) } value={lastName} />
+                    <MyInput name={'Nazwisko:'} setValue={ setLastName } value={lastName} />
                 </div>
             </div>
             <div className="grid gap-4 mb-2 md:grid-cols-2">
                 <div>
-                    <MyInput name={'Pozycja:'} onChange={ (e) => setPosition(e.target.value) } value={position} />
+                    <MyInput name={'Pozycja:'} setValue={ setPosition } value={position} />
                 </div>
                 <div>
-                    <MyInput name={'Numer telefonu:'} onChange={ (e) => setPhone(e.target.value) } value={phone} />
+                    <MyInput name={'Numer telefonu:'} setValue={ setPhone } value={phone} />
                 </div>
             </div>
             <button

@@ -1,7 +1,7 @@
 import { IEmployees } from "../../../slices/types";
-import { handleApiRequest } from "../handleApiRequest";
+import { SERVER_PORT, handleApiRequest } from "../handleApiRequest";
 
-const apiUrl = "http://localhost:5000/employees/";
+const apiUrl = `${SERVER_PORT}/employees/`;
 
 
 export const changeTime = async (monthId: string, employeeId: string, workTimeId: string, newTime: {time: string}) => {

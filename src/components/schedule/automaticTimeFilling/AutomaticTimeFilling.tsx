@@ -1,17 +1,19 @@
 import { useAppDispatch, useAppSelector } from "@/components/hooks/store";
-import { forwardRef, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { IEmployees, IWorkTime } from "../../../slices/types";
 import { getDayOfWeek } from "@/helpers/isWeekend";
 import { changeMonthWorkTime } from "@/app/api/employee";
 import { updateMonth } from "../../../slices/scheduleSlice";
 import useModal from "@/components/hooks/useModal";
 import { update } from "../../../slices/notificationSlice";
+import useDaysArrayInMonth from "@/components/hooks/useDaysArrayInMonth";
 
 const AutomaticTimeFilling = forwardRef<HTMLButtonElement>((props, ref) => {
-    const { dayList, month, year } = useAppSelector(state => state.scheduleSlice);
+    const { month, year } = useAppSelector(state => state.scheduleSlice);
     const { employees: listWorkTime, _id } = useAppSelector(state => state.scheduleSlice.personel);
     const [reservedEmployee, setReservedEmployee] = useState<IEmployees[]>([]);
     const { closeModal, isOpen, openModal } = useModal();
+    const dayList = useDaysArrayInMonth()
     const dispatch = useAppDispatch();
 
     const fillMissingDays = (workDays: Partial<IWorkTime>[]) => {
@@ -43,9 +45,9 @@ const AutomaticTimeFilling = forwardRef<HTMLButtonElement>((props, ref) => {
             ...employee,
             work_time: employee.work_time.map((time, i) => {
                 const isWeek = getDayOfWeek(year, month.numb, time.day) === 'Sobota' || getDayOfWeek(year, month.numb, time.day) === 'Niedziela';
-                const isSaturday = getDayOfWeek(year, month.numb, time.day) === 'Sobota'
+                const isSaturday = getDayOfWeek(year, month.numb, time.day) === 'Sobota';
                 if (isSaturday) {
-                    return { ...time, time: employee.work_time[index].time !== '-' ? '9-21' : '-' };
+                    return { ...time, time: employee.work_time[i].time !== '-' ? '9-21' : '-' };
                 }
                 if (isWeek) {
                     return { ...time, time: '-' };
@@ -61,7 +63,7 @@ const AutomaticTimeFilling = forwardRef<HTMLButtonElement>((props, ref) => {
         dispatch(updateMonth({ month, year }));
         openModal()
     };
-
+    
     return (
         <>
             {
@@ -77,7 +79,6 @@ const AutomaticTimeFilling = forwardRef<HTMLButtonElement>((props, ref) => {
                     </svg>
                 )
             }
-
 
             <button ref={ref} onClick={() => autoGeneration()} disabled={isOpen}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6  hover:opacity-70">

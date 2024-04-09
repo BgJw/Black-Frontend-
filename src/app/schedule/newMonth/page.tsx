@@ -22,15 +22,8 @@ const NewMonth = () => {
     const [month, setMonth] = useState('');
     const [employees, setEmployees] = useState<Partial<IEmployees>[]>([]);
     const {isOpen, openModal, closeModal } = useModal();
-    const dispatсh = useAppDispatch();
+    const dispatch = useAppDispatch();
 
-    const handleYearChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-        setYear(e.target.value);
-    };
-
-    const handleMonthChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-        setMonth(e.target.value);
-    };
 
     const handleAddEmployee = (name: string, position: string) => {
         const employee: Partial<IEmployees> = {
@@ -40,13 +33,13 @@ const NewMonth = () => {
             work_time: []
         }
         setEmployees([...employees, employee]);
-        dispatсh(update('Dodano do grafiku ' + name));
+        dispatch(update('Dodano do grafiku ' + name));
 
     };
     const handleRemoveEmployee = (index: number) => {
         const filter = employees.filter((_, i) => i !== index);
         setEmployees(filter);
-        dispatсh(update('Usunieto z grafiku ' + employees[index].name));
+        dispatch(update('Usunieto z grafiku ' + employees[index].name));
     }
 
     const fetchNewMonth = async () => {
@@ -61,13 +54,13 @@ const NewMonth = () => {
                 const res = await addNewMonth(newMonth);
                 console.log(res.message);
                 if (res.success) {
-                    dispatсh(update('Stworzony nowy grafik, mieśiąc: ' + month));
+                    dispatch(update('Stworzony nowy grafik, mieśiąc: ' + month));
                     setEmployees([]);
                 } else {
-                    dispatсh(update(res.message));
+                    dispatch(update(res.message));
                 }
             } else {
-                dispatсh(update('Wypęlnij wszystkie niezbedne pola'));
+                dispatch(update('Wypęlnij wszystkie niezbedne pola'));
             }
             
     }
@@ -77,8 +70,8 @@ const NewMonth = () => {
             <Notification />
             <div className='mb-2 flex items-center justify-center relative'> {/* Разделение на две колонки */}
                 <div className='grid gap-4 md:grid-cols-2 justify-items-center'>
-                    <MyInput name={'Rok'} onChange={handleYearChange} value={year} />
-                    <MySelect name={'Mięsiąc'} options={monthNames} onChange={handleMonthChange} />
+                    <MyInput name={'Rok'} setValue={setYear} value={year} />
+                    <MySelect name={'Mięsiąc'} options={monthNames} setValue={setMonth} />
                 </div>
                 <Tooltip placement={"right-start"} content="Dodaj pracownika" className="border rounded-md border-blue-gray-50 bg-white px-2 py-2 shadow-xl shadow-black/10 text-black text-xs">
                     <button

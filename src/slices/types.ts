@@ -20,7 +20,8 @@ export interface IPersonel {
 export enum Status {
     idle = 'idle',
     loading = 'loading',
-    error = 'error'
+    error = 'error',
+    notFound = 'Month not found',
 }
 export interface ScheduleSlice {
     year: number,

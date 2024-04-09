@@ -8,7 +8,7 @@ import WorkCell from '../workCell/WorkCell';
 export const WorkTimeTable = () => {
     const { month, year, personel } = useAppSelector(store => store.scheduleSlice);
     const daysInMonth = useDaysArrayInMonth();
-
+    
   return (
     <tbody>
     {
@@ -18,7 +18,7 @@ export const WorkTimeTable = () => {
                     {day + '.' + (month.numb ) + ' ' + getDayOfWeek(year, month.numb, day)}
             </th>
             {
-                personel.employees.map(emplo => (
+                personel.employees && personel.employees.map(emplo => (
                     <WorkCell
                         key={emplo._id}
                         employeeId={emplo._id}

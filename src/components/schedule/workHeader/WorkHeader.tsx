@@ -17,7 +17,7 @@ export const WorkHeader = () => {
                   Data / Pracownik
           </th>
           {
-          employees.map(emplo => (
+         employees && employees.map(emplo => (
                   <th scope="col" className="px-6 py-3 relative" key={emplo._id}>
                       {
                           emplo.name

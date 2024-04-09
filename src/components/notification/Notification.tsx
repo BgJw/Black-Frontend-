@@ -11,11 +11,9 @@ const Notification = () => {
     useEffect(() => {
         let timer: NodeJS.Timeout;
         if (message.length > 0) {
-            // Запускаем анимацию
             setAnimation(true);
 
             timer = setTimeout(() => {
-                // Завершаем анимацию и удаляем текст
                 setAnimation(false);
                 dispatch(removeText());
             }, 2500);

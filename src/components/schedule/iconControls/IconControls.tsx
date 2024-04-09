@@ -1,10 +1,11 @@
 "use client"
 import { Tooltip } from "@material-tailwind/react";
 import { resetMonth } from "../../../slices/scheduleSlice";
-import { useAppDispatch } from "@/components/hooks/store";
+import { useAppDispatch, useAppSelector } from "@/components/hooks/store";
 import dynamic from "next/dynamic";
 import useModal from "@/components/hooks/useModal";
 import AutomaticTimeFilling from "../automaticTimeFilling/AutomaticTimeFilling";
+import { Status } from "@/slices/types";
 
 const DynamicModalAddEmployee = dynamic(() => import('../modals/AddEmployee'), {
     loading: () => <p>Loading...</p>,
@@ -19,7 +20,7 @@ const IconControls = () => {
     const dispatch = useAppDispatch();
     const addEmployeeModal = useModal();
     const removeEmployeeModal = useModal();
-
+    const status = useAppSelector(state => state.scheduleSlice.status);
 
     const styleTooltip = "border rounded-md border-blue-gray-50 bg-white px-2 py-2 shadow-xl shadow-black/10 text-black text-xs";
 
@@ -31,6 +32,8 @@ const IconControls = () => {
             {
             removeEmployeeModal.isOpen && <DynamicModalRemoveEmployee changeModal={removeEmployeeModal.closeModal} />
             }
+            {
+                status === Status.idle && 
             <center className="flex justify-end items-center h-10 gap-3 relative">
                 <Tooltip content="Wrocić do aktualnego mięsiąca" className={styleTooltip}>
                     <button
@@ -62,6 +65,7 @@ const IconControls = () => {
                     <AutomaticTimeFilling /> 
                 </Tooltip>
             </center>
+            }
         </>
     );
 };

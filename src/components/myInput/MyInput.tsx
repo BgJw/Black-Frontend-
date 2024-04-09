@@ -1,13 +1,17 @@
-import { ChangeEventHandler } from "react";
+import { ChangeEventHandler, memo } from "react";
 
 interface IMyInput {
     name: string,
     value: string,
-    onChange: ChangeEventHandler<HTMLInputElement>
+    setValue: (value: string) => void,
 }
 
-const MyInput = ({ name, onChange, value }: IMyInput) => {
+const MyInput = memo(({ name, value, setValue }: IMyInput) => {
 
+    const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+        setValue(e.target.value)
+    }
+    
     return (
         <div className="block">
         <label htmlFor={name} className="block mb-2 text-sm font-medium text-gray-900">
@@ -23,6 +27,6 @@ const MyInput = ({ name, onChange, value }: IMyInput) => {
                 onChange={ onChange} />
         </div>
     );
-};
+});
 
 export default MyInput;

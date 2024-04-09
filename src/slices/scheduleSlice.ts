@@ -1,5 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IPersonel, ScheduleSlice, Status } from "./types";
+import { SERVER_PORT } from "@/app/api/handleApiRequest";
 
 interface Ifetch {
     department: string,
@@ -7,12 +8,16 @@ interface Ifetch {
     year: number
 }
 
-
 export const fetchMonth = createAsyncThunk(
     'schedule/fetchMonth',
     async ({department, month, year}: Ifetch ) => {
-        const responce = await fetch(`http://localhost:5000/months/${department}/${month}/${year}`);
-        return await responce.json();
+        try {
+            const res = await fetch(`${SERVER_PORT}/months/${department}/${month}/${year}`);
+            return await res.json();
+            
+        } catch (error) {
+            return (error as Error).message;
+        }
     }
 )
 export const monthNames = [
@@ -23,7 +28,6 @@ export const monthNames = [
 const currentDate = new Date();
 const currentMonth = currentDate.getMonth() + 1;
 const currentYear = currentDate.getFullYear();
-const daysInMonth = new Date(currentYear, currentMonth, 0).getDate();
 
 
 
@@ -90,12 +94,17 @@ const ScheduleSlice = createSlice({
         },
     },
     extraReducers: builder => {
-        builder.addCase(fetchMonth.pending, (state) => {
+        builder.addCase(fetchMonth.pending, state => {
             state.status = Status.loading;
         });
-        builder.addCase(fetchMonth.fulfilled, (state, action: PayloadAction<IPersonel>) => {
-            state.status = Status.idle;
-            state.personel = action.payload;
+        builder.addCase(fetchMonth.fulfilled, (state, action: PayloadAction<IPersonel | string>) => {
+            
+            if (typeof action.payload === 'string') {
+                state.status = Status.notFound;
+              } else {
+                state.status = Status.idle;
+                state.personel = action.payload;
+              }
         });
         builder.addCase(fetchMonth.rejected, state => {
             state.status = Status.error;            

@@ -2,165 +2,21 @@
 import { useAppSelector } from "@/components/hooks/store";
 import MyInput from "@/components/myInput/MyInput";
 import MySelect from "@/components/mySelect/MySelect";
+import Notification from "@/components/notification/Notification";
 import { Header } from "@/components/orders/header/Header";
-import SelectedItem from "@/components/orders/selectedItem/SelectedItem";
+import { Items } from "@/components/orders/items/Items";
+import SelectForm from "@/components/orders/selectForm/SelectForm";
+import { SubmitForm } from "@/components/orders/submitForm/SubmitForm";
 import { TotalPrice } from "@/components/orders/totalPrice/TotalPrice";
 import { getDates } from "@/helpers/isWeekend";
-import { ChangeEventHandler, useState } from "react";
+import { useCallback, useState } from "react";
 
-interface IList {
-  dateReceived: string;
-  whatReceived: ISelectedItem[];
-  customerNumber: string;
-  receivedBy: string;
-  amountToPay: string;
-  paid: boolean;
-  cardOrCash: PaidMethod;
-  weight: string;
-  whoMadeIt: string;
-  hour: string;
-  forWhen: string;
-}
 
 export enum PaidMethod {
   Cash = "Gotówka",
   Card = "Karta",
   DoPay = 'Do zapłaty'
 }
-
-const listThings = [
-  {
-    "id": 1,
-    "price": "19.89 zł",
-    "name": "pranie + magieł"
-  },
-  {
-    "id": 2,
-    "price": "39,89 zł",
-    "name": "Marynarka"
-  },
-  {
-    "id": 3,
-    "price": "35,19 zł",
-    "name": "Spodnie"
-  },
-  {
-    "id": 4,
-    "price": "75,08 zł",
-    "name": "Garnitur dwuczęściowy"
-  },
-  {
-    "id": 5,
-    "price": "35,19 zł",
-    "name": "Spódnica"
-  },
-  {
-    "id": 6,
-    "price": "41,05 zł",
-    "name": "Sukienka"
-  },
-  {
-    "id": 7,
-    "price": "68,19 zł",
-    "name": "Sukienka wieczorowa"
-  },
-  {
-    "id": 8,
-    "price": "51,69 zł",
-    "name": "Sukienka komunijna"
-  },
-  {
-    "id": 9,
-    "price": "21,09 zł",
-    "name": "Kamizelka"
-  },
-  {
-    "id": 10,
-    "price": "17,59 zł",
-    "name": "Koszula"
-  },
-  {
-    "id": 11,
-    "price": "16,39 zł",
-    "name": "T-shirt"
-  },
-  {
-    "id": 12,
-    "price": "12,89 zł",
-    "name": "Koszula - tylko prasowanie"
-  },
-  {
-    "id": 13,
-    "price": "23,49 zł",
-    "name": "Bluzka"
-  },
-  {
-    "id": 14,
-    "price": "22,29 zł",
-    "name": "Krawat"
-  },
-  {
-    "id": 15,
-    "price": "51,69 zł",
-    "name": "Kurtka/płaszcz cienki"
-  },
-  {
-    "id": 16,
-    "price": "65,79 zł",
-    "name": "Kurtka ocieplana"
-  },
-  {
-    "id": 17,
-    "price": "70,49 zł",
-    "name": "Kurtka puchowa"
-  },
-  {
-    "id": 18,
-    "price": "70,49 zł",
-    "name": "Płaszcz ocieplany"
-  },
-  {
-    "id": 19,
-    "price": "78,79 zł",
-    "name": "Płaszcz puchowy"
-  },
-  {
-    "id": 20,
-    "price": "62,29 zł",
-    "name": "Płaszcz flauszowy"
-  },
-  {
-    "id": 21,
-    "price": "46,99 zł",
-    "name": "Kamizelka puchowa"
-  },
-  {
-    "id": 22,
-    "price": "82,29 zł",
-    "name": "Kurtka narciarska"
-  },
-  {
-    "id": 23,
-    "price": "52,89 zł",
-    "name": "Spodnie narciarskie"
-  },
-  {
-    "id": 24,
-    "price": "28,19 zł",
-    "name": "Sweter"
-  },
-  {
-    "id": 25,
-    "price": "42,29 zł",
-    "name": "Sweter wełniany"
-  },
-  {
-    "id": 26,
-    "price": "28,19 zł",
-    "name": "Bluza"
-  }
-]
-
 
 const hours = [
   "09:00",
@@ -177,18 +33,21 @@ const hours = [
   "20:00",
 ];
 
-const paymendMethode = [PaidMethod.Card, PaidMethod.Cash, PaidMethod.DoPay];
+export const paymendMethode = [PaidMethod.Card, PaidMethod.Cash, PaidMethod.DoPay];
+
+const listDates = getDates(new Date(), 30);
 
 export interface ISelectedItem {
   id: number;
 	price: string;
   name: string;
 	numb: string;
-}
+};
+
+
 const Orders = () => {
-  const clientNumber = useAppSelector(
-    (state) => state.ordersSlice.customerNumber
-  );
+  const clientNumber = useAppSelector((state) => state.ordersSlice.customerNumber);
+
   const [customerNumber, setCustomerNumber] = useState(
     String(
       clientNumber < 10
@@ -205,116 +64,102 @@ const Orders = () => {
       "/" +
       new Date().getFullYear()
   );
+  const [hour, setHour] = useState("");
   const [forWhen, setForWhen] = useState("");
   const [receivedBy, setReceivedBy] = useState("");
   const [amountToPay, setAmountToPay] = useState("");
-  const [cardOrCash, setCardOrCash] = useState<PaidMethod>(PaidMethod.DoPay);
-  const [hour, setHour] = useState("");
+  const [cardOrCash, setCardOrCash] = useState('' as PaidMethod);
   const [selectedItems, setSelectedItems] = useState<ISelectedItem[]>([]);
-
-  const listName = listThings.map((item) => item.name);
-
-
-
-  const listDates = getDates(new Date(), 30);
-
-  const sendDate = () => {
-    const newOrder: IList = {
-      dateReceived,
-      whatReceived: selectedItems,
-      customerNumber,
-      hour,
-      receivedBy,
-      amountToPay,
-      paid: cardOrCash === PaidMethod.DoPay ? false : true,
-      cardOrCash,
-      weight: '',
-      whoMadeIt: "",
-      forWhen,
-    };
-
     
+  const newOrder = {
+    dateReceived,
+    whatReceived: selectedItems,
+    customerNumber,
+    receivedBy,
+    amountToPay,
+    paid: cardOrCash === PaidMethod.DoPay ? false: true,
+    cardOrCash,
+    weight: '',
+    whoMadeIt: '',
+    hour,
+    forWhen,
   };
-  const increaseItemCount = (id: number, quantity: string) => {
-    const index = selectedItems.findIndex((item) => item.id === id);
-    if (index !== -1) {
-      const newItems = [...selectedItems];
-      newItems[index].numb = quantity;
-      setSelectedItems(newItems);
-    }
-  } 
 
-  const handleSelectChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
-    if (e.target.value !== "Co przyjęte") {
+  const setCardOrCashProps = useCallback((value: string) =>{ setCardOrCash(value as PaidMethod)}, [setCardOrCash, cardOrCash]);
 
-      if (!selectedItems.find( item => item.name === e.target.value)) {
-        setSelectedItems([...selectedItems, {
-          price: listThings.filter((item) => item.name === String(e.target.value))[0].price,
-          name: listThings.filter((item) => item.name === String(e.target.value))[0].name,
-          id: listThings.filter((item) => item.name === String(e.target.value))[0].id,
-          numb: '1',
-        }]);
-      }
+  const resetAll = () =>{
+      setHour('');
+      setForWhen('');
+      setReceivedBy('');
+      setAmountToPay('');
+      setCardOrCashProps('');
+      setSelectedItems([]);
+      setDateReceived(new Date().getDate() +
+        "/" +
+        (new Date().getMonth() + 1) +
+        "/" +
+        new Date().getFullYear());
 
-    }
-  };
-  
+        setCustomerNumber(String(
+      clientNumber < 10
+        ? "00" + clientNumber
+        : clientNumber < 100
+        ? "0" + clientNumber
+        : clientNumber
+    ));
+
+  }
   return (
-    <div className="w-full mb-8 mt-8">
+    <div className="w-full mb-8 mt-8 relative">
       <Header />
       <div className="w-[80%] p-2 m-auto flex flex-col">
         <div className="grid gap-4 mb-2 md:grid-cols-3">
-          <MySelect
-            name={"Co przyjęte"}
-            onChange={(e) => handleSelectChange(e)}
-            options={listName}
-          />
+          <SelectForm 
+            selectedItems={selectedItems} setSelectedItems={setSelectedItems} />
           <MyInput
             name={"Data przyjęcia"}
-            onChange={(e) => setDateReceived(e.target.value)}
+            setValue={setDateReceived}
             value={dateReceived}
           />
           <MyInput
             name={"Nr klienta"}
-            onChange={(e) => setCustomerNumber(e.target.value)}
+            setValue={setCustomerNumber}
             value={customerNumber}
           />
         </div>
         <div className="grid gap-4 mb-2 lg:grid-cols-3 grid-cols-1">
-          <div
-            className="grid items-start gap-2"
-            style={{ gridTemplateRows: "repeat(auto-fill, 30px)" }}>
-
-            {selectedItems.map((item, i) => (
-              <SelectedItem item={item} key={item.id} increaseItemCount={increaseItemCount} />
-            ))}
-
-          </div>
+          
+          <Items 
+            selectedItems={selectedItems} 
+            setSelectedItems={setSelectedItems} />
+          
           <div className="grid md:grid-cols-2 gap-4 col-span-2">
             <MyInput
               name={"Kto przyjąl"}
-              onChange={(e) => setReceivedBy(e.target.value)}
-              value={receivedBy.toUpperCase()}
+              setValue={setReceivedBy}
+              value={receivedBy}
             />
             <MySelect
               name={"Metoda oplaty"}
-              onChange={(e) => setCardOrCash(e.target.value as PaidMethod)}
+              setValue={setCardOrCashProps}
               options={paymendMethode}
             />
             <MySelect
-              name={"Godzina odbioru"}
-              onChange={(e) => setHour(e.target.value)}
-              options={hours}
+              name={"Na kiedy ?"}
+              setValue={setForWhen}
+              options={listDates}
             />
             <MySelect
-              name={"Na kiedy ?"}
-              onChange={(e) => setForWhen(e.target.value)}
-              options={listDates}
+              name={"Godzina odbioru"}
+              setValue={setHour}
+              options={hours}
             />
           </div>
         </div>
         <TotalPrice items={selectedItems} setAmountToPay={setAmountToPay} />
+        <SubmitForm newOrder={newOrder} resetAll={resetAll}/>
       </div>
+      <Notification />
     </div>
   );
 };

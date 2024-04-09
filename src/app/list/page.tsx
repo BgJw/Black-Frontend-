@@ -7,6 +7,8 @@ import ListTitle from '@/components/list/listTitle/ListTitle';
 import s from './list.module.scss';
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '@/components/hooks/store';
+import { log } from 'console';
+import { SERVER_PORT } from '../api/handleApiRequest';
 
 enum payMetod {
     card = 'K',
@@ -37,10 +39,11 @@ const List = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:5000/orders');
+                const response = await fetch(`${SERVER_PORT}/orders`);
 
                 if (response.ok) {
                     const data: IList[] = await response.json();
+                    
                     setOrders(data);
                 } else {
                     console.error('Error fetching data:', response.statusText);

@@ -1,8 +1,8 @@
 import { IPersonel } from "../../../slices/types";
-import { ApiResponse, handleApiRequest } from "../handleApiRequest";
+import { ApiResponse, SERVER_PORT, handleApiRequest } from "../handleApiRequest";
 
 
-const apiUrl = "http://localhost:5000/months/";
+const apiUrl = `${SERVER_PORT}/months/`;
 
 
 
