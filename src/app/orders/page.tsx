@@ -10,13 +10,8 @@ import { SubmitForm } from "@/components/orders/submitForm/SubmitForm";
 import { TotalPrice } from "@/components/orders/totalPrice/TotalPrice";
 import { getDates } from "@/helpers/isWeekend";
 import { FC, useCallback, useState } from "react";
+import { PaidMethod } from "../api/order";
 
-
-export enum PaidMethod {
-  Cash = "Gotówka",
-  Card = "Karta",
-  DoPay = 'Do zapłaty'
-}
 
 const hours = [
   "09:00",

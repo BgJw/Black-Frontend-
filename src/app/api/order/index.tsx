@@ -1,8 +1,17 @@
-import { ISelectedItem, PaidMethod } from "@/app/orders/page";
+import { ISelectedItem } from "@/app/orders/page";
 import { ApiResponse, SERVER_PORT, handleApiRequest } from "../handleApiRequest";
 
 
+
 const apiUrl = `${SERVER_PORT}/orders/`;
+
+
+
+export enum PaidMethod {
+    Cash = "Gotówka",
+    Card = "Karta",
+    DoPay = 'Do zapłaty'
+  }
 
 export interface IList {
     dateReceived: string;
