@@ -34,7 +34,7 @@ useEffect( () => {
 
       return (
         <>
-          <IconButton variant="text" size="lg" onClick={ () => offsetWindow && openDrawer}>
+          <IconButton variant="text" size="lg" onClick={ openDrawer}>
             {isDrawerOpen ? (
               <XMarkIcon className="h-8 w-8 stroke-2" />
             ) : (
