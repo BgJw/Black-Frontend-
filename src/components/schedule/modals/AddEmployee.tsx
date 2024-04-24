@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '@/components/hooks/store';
 import { updateMonth } from '../../../slices/scheduleSlice';
 import CreateEmployee from '@/components/newMonth/CreateEmployee';
 import { update } from '../../../slices/notificationSlice';
+import { Button } from 'flowbite-react';
 
 interface IModal {
   changeModal: Dispatch<SetStateAction<boolean>>
@@ -42,9 +43,14 @@ const AddEmployee = React.memo(({ changeModal }: IModal) => {
           changeModal(false);
         }
       }}
-      className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center z-10"
+      className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center z-30"
     >
-      <div ref={modalRef} className="p-8 border w-1/2 shadow-lg rounded-md bg-white">
+      <div ref={modalRef} className="p-8 border md:w-1/2 w-full shadow-lg rounded-md bg-white">
+        <Button
+          className='absolute md:hidden right-2 top-2' color="failure"
+          onClick={ () => changeModal(false)}>
+            X
+        </Button>
           <h3 className="text-center text-2xl font-bold text-gray-900 mb-6">Dodaj nowego pracownika</h3>
           <CreateEmployee addEmployee={handleAddEmployee} />
       </div>

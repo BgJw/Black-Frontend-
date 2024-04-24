@@ -10,8 +10,9 @@ import SelectForm from "@/components/orders/selectForm/SelectForm";
 import { SubmitForm } from "@/components/orders/submitForm/SubmitForm";
 import { TotalPrice } from "@/components/orders/totalPrice/TotalPrice";
 import { getDates } from "@/helpers/isWeekend";
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { ISelectedItem, PaidMethod } from "../api/order";
+import { initFlowbite } from "flowbite";
 
 
 const hours = [
@@ -97,7 +98,6 @@ const Orders: FC = () => {
         ? "0" + clientNumber
         : clientNumber
     ));
-
   }
   return (
     <div className="w-full mb-8 mt-8 relative">

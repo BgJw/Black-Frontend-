@@ -26,13 +26,13 @@ const Notification = () => {
         <>
             {message.length > 0 && (
                 <div
-                    className={`fixed right-3 w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-400 z-50 transition-all duration-1000  ${
+                    className={`fixed right-3 md:w-full w-[200px] max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-400 z-50 transition-all duration-1000  ${
                         animation ? 'top-20' : 'top-0'
                     }`}
                     role="alert"
                 >
                     <div className="flex">
-                        <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-blue-500 bg-blue-100 rounded-lg dark:text-blue-300 dark:bg-blue-900">
+                        <div className="inline-flex items-center justify-center flex-shrink-0 md:w-8 w-6 md:h-8 h-6 text-blue-500 bg-blue-100 rounded-lg dark:text-blue-300 dark:bg-blue-900">
                             <svg
                                 className="w-4 h-4"
                                 aria-hidden="true"
@@ -52,7 +52,7 @@ const Notification = () => {
                         </div>
                         <div className="ms-3 text-sm font-normal">
                             <span className="mb-1 text-sm font-semibold text-gray-900 dark:text-white">Update</span>
-                            <div className="mb-2 text-sm font-normal">{message}</div>
+                            <div className="mb-2 md:text-sm text-xs font-normal">{message}</div>
                         </div>
                     </div>
                 </div>

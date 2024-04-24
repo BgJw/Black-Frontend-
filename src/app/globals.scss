@@ -38,12 +38,24 @@ body{
     border: 1px solid red; /* Пример стиля для рамки */
     background-color: #ffcccc; /* Пример стиля для фона */
 }
-
-
+.main {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+}
+th{
+    min-width: 100px;
+}
 @media screen and (max-width: 768px) {
     .cell {
         width: $cell-width - 20;
         max-width: $cell-max-width - 20;
         min-width: $cell-min-width - 20;
     }
+    .main{
+        grid-template-columns: 1fr;
+    }
+
   }
+
+
+

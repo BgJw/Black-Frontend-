@@ -1,11 +1,9 @@
 import type { Metadata } from 'next'
 import { Providers } from '@/components/Providers'
 import { ReactNode } from 'react'
-
-
-import './globals.scss'
 import Header from '@/components/common/header/Header'
 import Sidebar from '@/components/common/sidebar/Sidebar'
+import './globals.scss'
 
 export const metadata: Metadata = {
     title: 'Black',
@@ -22,7 +20,7 @@ export default function RootLayout({
             <body>
                 <Providers>
                     <Header />
-                    <div className='position'>
+                    <div className='main'>
                         <Sidebar />
                         {children}
                     </div>

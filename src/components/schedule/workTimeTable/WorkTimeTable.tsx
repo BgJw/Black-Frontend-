@@ -10,12 +10,12 @@ export const WorkTimeTable = () => {
     const daysInMonth = useDaysArrayInMonth();
     
   return (
-    <tbody>
+    <tbody className=''>
     {
         daysInMonth.map(day => (    
-            <tr key={day} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-            <th scope="row" className="px-6 py-4 text-left font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {day + '.' + (month.numb ) + ' ' + getDayOfWeek(year, month.numb, day)}
+            <tr key={day} className="hover:bg-gray-700 bg-gray-800">
+            <th scope="row" className="md:px-6 px-3 md:py-3 py-2 text-left font-medium text-white whitespace-nowrap ">
+                    {day + '.' + (month.numb) + ' ' + getDayOfWeek(year, month.numb, day)}
             </th>
             {
                 personel.employees && personel.employees.map(emplo => (

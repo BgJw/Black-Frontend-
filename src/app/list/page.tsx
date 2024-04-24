@@ -4,9 +4,11 @@ import IsPaid from '@/components/list/isPaid/IsPaid';
 import ListHeader from '@/components/list/header/ListHeader';
 import ListTitle from '@/components/list/listTitle/ListTitle';
 
-import s from './list.module.scss';
 import { useEffect, useState } from 'react';
 import { SERVER_PORT } from '../api/handleApiRequest';
+
+import s from './list.module.scss';
+
 
 enum payMetod {
     card = 'K',

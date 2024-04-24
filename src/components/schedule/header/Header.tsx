@@ -8,7 +8,7 @@ const Header = () => {
 
 
     return (
-            <header className="flex md:w-1/2 justify-between items-center md:text-base text-xs" >
+            <header className="flex lg:w-[80%] justify-between items-center lg:text-base text-xs" >
                 <button
                     className="hover:opacity-70"
                     onClick={() => dispatch(prevMonth())}>
