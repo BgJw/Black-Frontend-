@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     description: 'Black Corporation',
 }
 
+{/* <ProtectedRoute> */}
 export default function RootLayout({
     children,
 }: {
