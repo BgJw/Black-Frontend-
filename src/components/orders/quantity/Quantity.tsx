@@ -45,7 +45,7 @@ const incrementFloatNumber = (numb: string) => {
     useEffect( () => increaseItemCount(id, quantity), [quantity]);
     
   return (
-    <form className="max-w-xs ml-auto">
+    <div className="max-w-xs ml-auto">
       <div className="relative flex items-center max-w-[8rem]">
         <button
           type="button"
@@ -107,6 +107,6 @@ const incrementFloatNumber = (numb: string) => {
           </svg>
         </button>
       </div>
-    </form>
+    </div>
   );
 };

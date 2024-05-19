@@ -52,7 +52,6 @@ const NewMonth = () => {
         }
             if (newMonth.department && newMonth.month && newMonth.year && newMonth.month !== 'Mięsiąc') {
                 const res = await addNewMonth(newMonth);
-                console.log(res.message);
                 if (res.success) {
                     dispatch(update('Stworzony nowy grafik, mieśiąc: ' + month));
                     setEmployees([]);
@@ -68,7 +67,7 @@ const NewMonth = () => {
         <div className='sm:m-auto md:m-0 flex flex-col items-center relative'>
             <Header />
             <Notification />
-            <div className='mb-2 flex items-center justify-center relative'> {/* Разделение на две колонки */}
+            <div className='mb-2 flex items-center justify-center relative'>
                 <div className='grid gap-4 md:grid-cols-2 justify-items-center'>
                     <MyInput name={'Rok'} setValue={setYear} value={year} />
                     <MySelect name={'Mięsiąc'} options={monthNames} setValue={setMonth} />
@@ -108,3 +107,4 @@ const NewMonth = () => {
 };
 
 export default NewMonth;
+

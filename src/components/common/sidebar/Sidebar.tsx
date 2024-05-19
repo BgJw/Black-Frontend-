@@ -1,6 +1,6 @@
 'use client'
 
-import { IconButton, List, Drawer, Card } from "@material-tailwind/react";
+import { IconButton, List, Drawer } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { memo, useEffect, useMemo, useState } from 'react';
 import SidebarItem from './SideBarItem';
@@ -15,13 +15,12 @@ const Sidebar = memo(() => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(true);
     const [offsetWindow, setOffSetWindow] = useState<boolean>();
 
-    const handleOpen = (link: string) => {
+    const handleOpen = (link: string) => {      
         setOpen(open === link ? '' : link);
       };
      
     const openDrawer = () => setIsDrawerOpen(true);
     const closeDrawer = () => setIsDrawerOpen(false);
-
 
     const memoizedSidebarItems = useMemo(() => (
       links.map(({ link, name, tasks }, index) => (
@@ -36,35 +35,35 @@ const Sidebar = memo(() => {
       ))
   ), [links, open]);
      
-useEffect( () => {
+  useEffect( () => {
     setOffSetWindow(window.innerWidth <= 768);
-    if(offsetWindow) setIsDrawerOpen(false);
-
-}, [offsetWindow]) 
-
+    
+  }, [offsetWindow]) 
+  
+  useEffect( () => {
+  if(offsetWindow) setIsDrawerOpen(false);
+}, []) 
+  
       return (
-        <>
-          <IconButton variant="text" size="lg" onClick={ openDrawer}>
+        <div
+        // onClick={ () => offsetWindow && closeDrawer()}
+        className="relative w-full h-full z-30 bg-opacity-60">
+          <IconButton variant="text" size="lg" onClick={openDrawer}>
             {isDrawerOpen ? (
               <XMarkIcon className="h-8 w-8 stroke-2" />
             ) : (
               <Bars3Icon className="h-8 w-8 stroke-2" />
             )}
           </IconButton>
+            
           <Drawer 
             open={isDrawerOpen} onClose={ () => offsetWindow && closeDrawer() } 
-            className='bg-gray-900 text-white z-20 w-[200px] top-30'>
-            <Card
-              color="transparent"
-              shadow={true}
-              className="h-[calc(100vh-2rem)] w-full"
-            >
+            className='bg-gray-900 text-white z-20 w-[200px] top-16'>
               <List>
                 {memoizedSidebarItems}
               </List>
-            </Card>
           </Drawer>
-        </>
+        </div>
       );
 });
 

@@ -1,5 +1,6 @@
+import { memo } from "react";
 
-const Icons = ({name}: {name: string}) => {
+const Icons = memo(({name}: {name: string}) => {
     return (
         <>
         {
@@ -29,6 +30,6 @@ const Icons = ({name}: {name: string}) => {
         }
         </>
     );
-};
+});
 
 export default Icons;

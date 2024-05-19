@@ -3,8 +3,12 @@ import { useAppSelector } from '@/components/hooks/store';
 import useDaysArrayInMonth from '@/components/hooks/useDaysArrayInMonth';
 import { getDayOfWeek } from '@/helpers/isWeekend';
 import React from 'react'
-import WorkCell from '../workCell/WorkCell';
+import dynamic from 'next/dynamic';
 
+
+const DynamicWorkCell = dynamic( () => import('../workCell/WorkCell'), {
+  loading: () => <p>Loading...</p>,
+})
 export const WorkTimeTable = () => {
     const { month, year, personel } = useAppSelector(store => store.scheduleSlice);
     const daysInMonth = useDaysArrayInMonth();
@@ -19,7 +23,7 @@ export const WorkTimeTable = () => {
             </th>
             {
                 personel.employees && personel.employees.map(emplo => (
-                    <WorkCell
+                    <DynamicWorkCell
                         key={emplo._id}
                         employeeId={emplo._id}
                         monthId={personel._id}

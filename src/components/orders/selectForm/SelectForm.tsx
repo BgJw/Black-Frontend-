@@ -153,7 +153,7 @@ const SelectForm = memo(({selectedItems, setSelectedItems  }: ISelectForm) => {
 
 
   return (
-    <form className="max-w-sm mb-2 w-full">
+    <div className="max-w-sm mb-2 w-full">
       <label
         htmlFor={'Co przyjęte'}
         className="block mb-2 text-sm font-medium text-gray-900 cursor-pointer"
@@ -173,7 +173,7 @@ const SelectForm = memo(({selectedItems, setSelectedItems  }: ISelectForm) => {
           </option>
         ))}
       </select>
-    </form>
+    </div>
   );
 });
 

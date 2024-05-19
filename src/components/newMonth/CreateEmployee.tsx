@@ -27,20 +27,12 @@ const CreateEmployee = ({ addEmployee, setShow }: ICreateEmployee) => {
     return (
         <form onSubmit={handleSubmit} className='flex flex-col'>
             <div className="grid gap-4 mb-2 md:grid-cols-2">
-                <div>
-                    <MyInput name={'Imię:'} setValue={ setFirstName } value={firstName} />
-                </div>
-                <div>
-                    <MyInput name={'Nazwisko:'} setValue={ setLastName } value={lastName} />
-                </div>
+                    <MyInput name={'Imię'} setValue={ setFirstName } value={firstName} />
+                    <MyInput name={'Nazwisko'} setValue={ setLastName } value={lastName} />
             </div>
             <div className="grid gap-4 mb-2 md:grid-cols-2">
-                <div>
-                    <MyInput name={'Pozycja:'} setValue={ setPosition } value={position} />
-                </div>
-                <div>
-                    <MyInput name={'Numer telefonu:'} setValue={ setPhone } value={phone} />
-                </div>
+                    <MyInput name={'Pozycja'} setValue={ setPosition } value={position} />
+                    <MyInput name={'Numer telefonu'} setValue={ setPhone } value={phone} />
             </div>
             <button
                 type="submit"

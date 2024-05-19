@@ -1,10 +1,12 @@
 'use client'
-import { Accordion, AccordionHeader, AccordionBody, List, ListItem, ListItemPrefix, Typography } from "@material-tailwind/react";
-import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { Accordion, AccordionHeader, AccordionBody, List, ListItem, ListItemPrefix } from "@material-tailwind/react";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
-import { useMemo } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import Icons from './Icons';
+import { Spinner } from "flowbite-react";
+import SideBarItemTask from "./SideBarItemTask";
 
 interface SidebarItemProps {
     link: string;
@@ -15,25 +17,29 @@ interface SidebarItemProps {
 }
 
 const SidebarItem: React.FC<SidebarItemProps> = ({ link, name, tasks, open, handleOpen }) => {
+    const [loading, setLoading] = useState(false);
     const pathName = usePathname();
     const router = useRouter();
+    const activeLink = pathName === link;
 
-    const memoizedTasks = useMemo(() => (
-        tasks.map(task => (
-            <ListItem
-                key={task.link}
-                onClick={() => router.push(link + task.link)}
-                className='text-white md:text-sm text-xs'
-            >
-                <ListItemPrefix>
-                    {pathName.includes(link + task.link) && (
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                    )}
-                </ListItemPrefix>
-                {task.task}
-            </ListItem>
-        ))
-    ), [tasks, link, pathName, router]);
+    
+    const nextPage = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>, link: string) => {
+        e.stopPropagation();
+        if(activeLink){
+            handleOpen(link);
+        } else {
+            router.push(link);
+            setLoading(true)
+        }
+    }
+
+    useEffect( () => {
+        if(activeLink){
+            handleOpen(link);
+            setLoading(false)
+        }
+    }, [link, pathName])
+
 
     return (
         <Accordion
@@ -47,22 +53,25 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ link, name, tasks, open, hand
                 />
             }
         >
-            <ListItem className="p-0" selected={open}>
+            <ListItem className={activeLink ? "p-0 text-black bg-white" :'p-0 text-white'} selected={open}>
                 <AccordionHeader
-                    onClick={() => { router.push(link); handleOpen(link); }}
+                    onClick={(e) => nextPage(e, link)}
                     className="border-b-0 p-3"
                 >
                     <ListItemPrefix>
                         <Icons name={link} />
                     </ListItemPrefix>
-                    <Typography color="white" className="mr-1 font-normal sm:text-base text-xs">
+                    <div className="flex items-center gap-2">
+                    <span className="mr-1 font-normal sm:text-base text-xs">
                         {name}
-                    </Typography>
+                    </span>
+                        {loading && <Spinner className="w-4 h-4 flex items-center" />}
+                    </div>
                 </AccordionHeader>
             </ListItem>
             <AccordionBody className="py-1">
                 <List className="p-0">
-                    {memoizedTasks}
+                    <SideBarItemTask tasks={tasks} link={link}/> 
                 </List>
             </AccordionBody>
         </Accordion>

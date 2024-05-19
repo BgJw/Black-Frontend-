@@ -23,7 +23,7 @@ export enum Status {
     error = 'error',
     notFound = 'Month not found',
 }
-export interface ScheduleSlice {
+export interface IScheduleSlice {
     year: number,
     month: {
         name: string,

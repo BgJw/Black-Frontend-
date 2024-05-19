@@ -10,9 +10,8 @@ import SelectForm from "@/components/orders/selectForm/SelectForm";
 import { SubmitForm } from "@/components/orders/submitForm/SubmitForm";
 import { TotalPrice } from "@/components/orders/totalPrice/TotalPrice";
 import { getDates } from "@/helpers/isWeekend";
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useState } from "react";
 import { ISelectedItem, PaidMethod } from "../api/order";
-import { initFlowbite } from "flowbite";
 
 
 const hours = [
@@ -38,7 +37,8 @@ const listDates = getDates(new Date(), 30);
 
 const Orders: FC = () => {
   const clientNumber = useAppSelector((state) => state.ordersSlice.customerNumber);
-
+  console.log(clientNumber);
+  
   const [customerNumber, setCustomerNumber] = useState(
     String(
       clientNumber < 10
@@ -105,7 +105,8 @@ const Orders: FC = () => {
       <div className="w-[80%] p-2 m-auto flex flex-col">
         <div className="grid gap-4 mb-2 md:grid-cols-3">
           <SelectForm 
-            selectedItems={selectedItems} setSelectedItems={setSelectedItems} />
+            selectedItems={selectedItems} 
+            setSelectedItems={setSelectedItems} />
           <MyInput
             name={"Data przyjęcia"}
             setValue={setDateReceived}
@@ -115,10 +116,10 @@ const Orders: FC = () => {
             name={"Nr klienta"}
             setValue={setCustomerNumber}
             value={customerNumber}
+            disabled={true}
           />
         </div>
         <div className="grid gap-4 mb-2 lg:grid-cols-3 grid-cols-1">
-          
           <Items 
             selectedItems={selectedItems} 
             setSelectedItems={setSelectedItems} />

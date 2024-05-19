@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { IPersonel, ScheduleSlice, Status } from "./types";
+import { IPersonel, IScheduleSlice, Status } from "./types";
 import { SERVER_PORT } from "@/app/api/handleApiRequest";
 
 interface Ifetch {
@@ -31,7 +31,7 @@ const currentYear = currentDate.getFullYear();
 
 
 
-const initialState: ScheduleSlice = {
+const initialState: IScheduleSlice = {
     month: {
         name: monthNames[currentMonth - 1],
         numb: currentMonth,

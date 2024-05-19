@@ -5,6 +5,7 @@ export interface ApiResponse {
 
 
 export const SERVER_PORT = "https://black-backend-production.up.railway.app";
+// export const SERVER_PORT = "http://localhost:5000";
 
 const handleResponse = async (response: Response): Promise<ApiResponse> => {
     if (!response.ok) {

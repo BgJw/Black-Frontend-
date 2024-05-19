@@ -43,7 +43,7 @@ const AddEmployee = React.memo(({ changeModal }: IModal) => {
           changeModal(false);
         }
       }}
-      className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center z-30"
+      className="fixed inset-0 bg-gray-600 bg-opacity-80 overflow-y-auto h-full w-full flex items-center justify-center z-30"
     >
       <div ref={modalRef} className="relative p-8 border md:w-1/2 w-full shadow-lg rounded-md bg-white ">
         <Button

@@ -12,10 +12,12 @@ const OrdersSlice = createSlice({
   name: 'orderSlice',
   initialState,
   reducers: {
-
+    nextOrderNumber: (state) => {
+      state.customerNumber++;
+    }
   }
 });
 
-export const {} = OrdersSlice.actions
+export const {nextOrderNumber} = OrdersSlice.actions
 
 export default OrdersSlice.reducer
