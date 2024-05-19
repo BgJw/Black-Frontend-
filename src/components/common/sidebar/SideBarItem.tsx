@@ -71,7 +71,10 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ link, name, tasks, open, hand
             </ListItem>
             <AccordionBody className="py-1">
                 <List className="p-0">
-                    <SideBarItemTask tasks={tasks} link={link}/> 
+                    <SideBarItemTask 
+                        tasks={tasks} 
+                        link={link}
+                        handleOpen={handleOpen}/> 
                 </List>
             </AccordionBody>
         </Accordion>

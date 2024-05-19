@@ -8,15 +8,20 @@ import { FC, useEffect, useState } from "react";
 interface ISelectedItemProps {
     tasks: { link: string; task: string; }[];
     link: string;
+    handleOpen: (link: string) => void;
 }
-const SideBarItemTask:FC<ISelectedItemProps> = ({tasks, link}) => {
+const SideBarItemTask:FC<ISelectedItemProps> = ({tasks, link, handleOpen}) => {
     const pathName = usePathname();
     const router = useRouter();
     const [loading, setLoading] = useState(false);
 
     useEffect( () => {
-            setLoading(false)
+        setLoading(false)
     }, [pathName])
+
+    useEffect( ()=>{
+        handleOpen(link)
+    }, [link])
 
 
     return (
