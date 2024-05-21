@@ -74,7 +74,8 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ link, name, tasks, open, hand
                     <SideBarItemTask 
                         tasks={tasks} 
                         link={link}
-                        handleOpen={handleOpen}/> 
+                        handleOpen={handleOpen}
+                    /> 
                 </List>
             </AccordionBody>
         </Accordion>

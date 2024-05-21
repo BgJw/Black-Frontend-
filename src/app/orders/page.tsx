@@ -37,7 +37,6 @@ const listDates = getDates(new Date(), 30);
 
 const Orders: FC = () => {
   const clientNumber = useAppSelector((state) => state.ordersSlice.customerNumber);
-  console.log(clientNumber);
   
   const [customerNumber, setCustomerNumber] = useState(
     String(
@@ -102,11 +101,13 @@ const Orders: FC = () => {
   return (
     <div className="w-full mb-8 mt-8 relative">
       <Header />
-      <div className="w-[80%] p-2 m-auto flex flex-col">
-        <div className="grid gap-4 mb-2 md:grid-cols-3">
+      <div className="w-[80%] p-2 m-auto flex flex-col ">
+        <div className="flex flex-col-reverse md:grid gap-4 mb-2 md:grid-cols-3 justify-items-center">
           <SelectForm 
             selectedItems={selectedItems} 
-            setSelectedItems={setSelectedItems} />
+            setSelectedItems={setSelectedItems} 
+          />
+
           <MyInput
             name={"Data przyjęcia"}
             setValue={setDateReceived}
@@ -124,7 +125,7 @@ const Orders: FC = () => {
             selectedItems={selectedItems} 
             setSelectedItems={setSelectedItems} />
           
-          <div className="grid md:grid-cols-2 gap-4 col-span-2">
+          <div className="grid md:grid-cols-2 gap-4 col-span-2 items-center">
             <MyInput
               name={"Kto przyjąl"}
               setValue={setReceivedBy}

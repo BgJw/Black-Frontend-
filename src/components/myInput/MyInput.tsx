@@ -14,7 +14,7 @@ const MyInput = memo(({ name, value, setValue, disabled }: IMyInput) => {
     }
     
     return (
-        <div className="block">
+        <div className="block max-w-sm w-full">
         <label htmlFor={name} className="block mb-2 text-sm font-medium text-gray-900">
             {name}:
         </label>

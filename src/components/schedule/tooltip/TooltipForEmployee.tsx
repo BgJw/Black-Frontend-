@@ -7,6 +7,7 @@ import useDaysArrayInMonth from "@/components/hooks/useDaysArrayInMonth";
 const TooltipWithHelperIcon = React.memo(({ employee }: { employee: IEmployees }) => {
 
     const days = useDaysArrayInMonth();
+
     const [information, setInformation] = useState({
         name: employee.name || 'NaN',
         position: employee.position || 'NaN',
@@ -32,6 +33,7 @@ const TooltipWithHelperIcon = React.memo(({ employee }: { employee: IEmployees }
         })
     }
     const isValid = (str: string) => /^(\d{1,2})-(\d{1,2})$/.test(str);
+    
     const calculateWorkHours = (emplo: IEmployees) => {
 
         let hours = 0;
@@ -79,9 +81,8 @@ const TooltipWithHelperIcon = React.memo(({ employee }: { employee: IEmployees }
 
     return (
         <Tooltip
-            placement={"right-start"}
             content={
-                <div className="w-80 bg-white drop-shadow p-3 shadow-lg rounded-md">
+                <div className="overflow-auto max-w-96 bg-white drop-shadow p-3 shadow-lg rounded-md">
                     <span className="font-bold text-black">
                         {name}
                     </span>

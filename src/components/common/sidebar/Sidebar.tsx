@@ -46,7 +46,6 @@ const Sidebar = memo(() => {
   
       return (
         <div
-        // onClick={ () => offsetWindow && closeDrawer()}
         className="relative w-full h-full z-30 bg-opacity-60">
           <IconButton variant="text" size="lg" onClick={openDrawer}>
             {isDrawerOpen ? (
@@ -58,7 +57,7 @@ const Sidebar = memo(() => {
             
           <Drawer 
             open={isDrawerOpen} onClose={ () => offsetWindow && closeDrawer() } 
-            className='bg-gray-900 text-white z-20 w-[200px] top-16'>
+            className='bg-gray-900 text-white z-20 md:w-[200px] w-[180px] top-16'>
               <List>
                 {memoizedSidebarItems}
               </List>

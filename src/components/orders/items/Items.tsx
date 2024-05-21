@@ -17,15 +17,23 @@ export const Items = memo(({selectedItems, setSelectedItems}: IItems) => {
           setSelectedItems(newItems);
         }
       } 
-    
-
+      const removeSelectedItems = (itemId: number) => {
+        const newList = selectedItems.slice().filter( items => items.id !== itemId)
+        setSelectedItems( newList );
+      }
+      
   return (
     <div
-        className="grid items-start gap-2"
+        className="max-w-sm grid items-start gap-2"
         style={{ gridTemplateRows: "repeat(auto-fill, 30px)" }}>
           {
             selectedItems.map( item => (
-              <SelectedItem item={item} key={item.id} increaseItemCount={increaseItemCount} />
+              <SelectedItem 
+                  item={item} 
+                  key={item.id} 
+                  increaseItemCount={increaseItemCount} 
+                  removeSelectedItems={removeSelectedItems}
+                  />
             ))
           }
   </div>
