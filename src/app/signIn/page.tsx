@@ -1,13 +1,12 @@
 'use client'
 
 import { useState } from "react";
-
 import { Typography, Input, Button } from "@material-tailwind/react";
 import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
 import { SERVER_PORT } from "../api/handleApiRequest";
 
-export const SignIn = () => {
+const SignIn = () => {
     const [department, setDepartment] = useState("");
     const [password, setPassword] = useState("");
     const [passwordShown, setPasswordShown] = useState(false);
@@ -82,7 +81,7 @@ export const SignIn = () => {
               className="w-full placeholder:opacity-100 focus:border-t-primary border-t-blue-gray-200"
               labelProps={{
                 className: "hidden",
-              }}          />
+              }} crossOrigin={undefined}          />
           </div>
           <div className="mb-6">
             <label htmlFor="password">
@@ -103,15 +102,13 @@ export const SignIn = () => {
               }}
               className="w-full placeholder:opacity-100 focus:border-t-primary border-t-blue-gray-200"
               type={passwordShown ? "text" : "password"}
-              icon={
-                <i className="absolute right-0 top-2.5 cursor-pointer" onClick={togglePasswordVisiblity}>
+              icon={<i className="absolute right-0 top-2.5 cursor-pointer" onClick={togglePasswordVisiblity}>
                 {passwordShown ? (
                   <EyeIcon className="h-5 w-5" />
                 ) : (
                   <EyeSlashIcon className="h-5 w-5" />
                 )}
-              </i>} 
-            />
+              </i>} crossOrigin={undefined}            />
           </div>
           <Button 
             color="gray" 
