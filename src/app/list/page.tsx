@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { SERVER_PORT } from '../api/handleApiRequest';
 
 import s from './list.module.scss';
+import withAuth from '@/components/withAuth';
 
 
 enum payMetod {
@@ -55,7 +56,6 @@ const List = () => {
 
         fetchData();
     }, []);
-    console.log(orders);
     
     const itemsCount = 15;
 
@@ -110,4 +110,4 @@ const List = () => {
     );
 };
 
-export default List;
+export default withAuth(List);

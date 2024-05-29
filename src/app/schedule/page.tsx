@@ -1,7 +1,10 @@
+'use client'
+
 import Header from '@/components/schedule/header/Header';
 import WorkList from '@/components/schedule/workList/WorkList';
 import IconControls from '@/components/schedule/iconControls/IconControls';
 import Notification from '@/components/notification/Notification';
+import withAuth from '@/components/withAuth';
 
 
 
@@ -17,4 +20,4 @@ const Schedule = () => {
     );
 };
 
-export default Schedule;
+export default withAuth(Schedule);

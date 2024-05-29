@@ -6,11 +6,10 @@ import Sidebar from '@/components/common/sidebar/Sidebar'
 import './globals.scss'
 
 export const metadata: Metadata = {
-    title: 'Black',
+    title: 'Black Laundry',
     description: 'Black Corporation',
 }
 
-{/* <ProtectedRoute> */}
 export default function RootLayout({
     children,
 }: {

@@ -12,6 +12,7 @@ import { TotalPrice } from "@/components/orders/totalPrice/TotalPrice";
 import { getDates } from "@/helpers/isWeekend";
 import { FC, useCallback, useState } from "react";
 import { ISelectedItem, PaidMethod } from "../api/order";
+import withAuth from "@/components/withAuth";
 
 
 const hours = [
@@ -156,4 +157,4 @@ const Orders: FC = () => {
   );
 };
 
-export default Orders;
+export default withAuth(Orders);

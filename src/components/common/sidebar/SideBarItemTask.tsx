@@ -18,10 +18,10 @@ const SideBarItemTask:FC<ISelectedItemProps> = ({tasks, link, handleOpen}) => {
     useEffect( () => {
         setLoading(false)
     }, [pathName])
-
+    
     useEffect( ()=>{
-        handleOpen(link)
-    }, [link])
+        handleOpen(pathName)
+    }, [])
 
 
     return (

@@ -21,7 +21,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ link, name, tasks, open, hand
     const pathName = usePathname();
     const router = useRouter();
     const activeLink = pathName === link;
-
+    
     
     const nextPage = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>, link: string) => {
         e.stopPropagation();

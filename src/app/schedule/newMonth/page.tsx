@@ -9,20 +9,22 @@ import { monthNames } from '../../../slices/scheduleSlice';
 import CreateEmployee from '@/components/newMonth/CreateEmployee';
 import ListsNewEmployee from '@/components/newMonth/ListsNewEmployee';
 import { Tooltip } from '@material-tailwind/react';
-import { useSession } from 'next-auth/react';
 import { addNewMonth } from '@/app/api/month';
 import { update } from '../../../slices/notificationSlice';
 import Notification from '@/components/notification/Notification';
 import useModal from '@/components/hooks/useModal';
+import withAuth from '@/components/withAuth';
+import { fetchActiveSession } from '@/app/api/session';
 
 const NewMonth = () => {
     const currentYear = useAppSelector(state => state.scheduleSlice.year);
-    const { data } = useSession();
     const [year, setYear] = useState<string>(String(currentYear) || '');
     const [month, setMonth] = useState('');
     const [employees, setEmployees] = useState<Partial<IEmployees>[]>([]);
     const {isOpen, openModal, closeModal } = useModal();
     const dispatch = useAppDispatch();
+
+    
 
 
     const handleAddEmployee = (name: string, position: string) => {
@@ -43,9 +45,15 @@ const NewMonth = () => {
     }
 
     const fetchNewMonth = async () => {
+        const department = await fetchActiveSession();
+        if (!department) {
+            dispatch(update('Nie znaleziono sesji'));
+            return;
+        }
+
         
         const newMonth: Partial<IPersonel> = {
-            department: String(data?.user?.name),
+            department: department.username,
             employees: employees as IEmployees[],
             month: month,
             year: Number(year),
@@ -61,6 +69,7 @@ const NewMonth = () => {
             } else {
                 dispatch(update('Wypęlnij wszystkie niezbedne pola'));
             }
+            
             
     }
     return (
@@ -106,5 +115,5 @@ const NewMonth = () => {
     );
 };
 
-export default NewMonth;
+export default withAuth(NewMonth);
 

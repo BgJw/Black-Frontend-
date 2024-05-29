@@ -2,40 +2,51 @@
 
 import React, { useEffect } from "react";
 import { Status } from "../../../slices/types";
-import { useSession } from "next-auth/react";
 import { useAppDispatch, useAppSelector } from "@/components/hooks/store";
 import { fetchMonth } from "../../../slices/scheduleSlice";
 import { WorkHeader } from "../workHeader/WorkHeader";
 import { WorkTimeTable } from "../workTimeTable/WorkTimeTable";
 import Link from "next/link";
+import { fetchActiveSession } from "@/app/api/session";
 
 
 const ScheduleList = () => {
   const { month, year, status } = useAppSelector(
     (store) => store.scheduleSlice
   );
-  const session = useSession();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    session.data?.user &&
-      dispatch(
-        fetchMonth({
-          department: String(session.data.user.name),
-          month: month.name,
-          year,
-        })
-      );
-  }, [month, year, session.data?.user?.name]);
+    const getSessionAndFetchMonth = async () => {
+      try {
+        const session = await fetchActiveSession();
+        if (session && session.username) {
+          dispatch(
+            fetchMonth({
+              department: session.username,
+              month: month.name,
+              year,
+            })
+          );
+        } else {
+          console.error("Error retrieving profile data");
+        }
+      } catch (error) {
+        console.error("Error retrieving profile data", error);
+      }
+    };
+
+    getSessionAndFetchMonth();
+  }, [dispatch, month, year]);
   
   return (
     <div className="relative p-3">
       {status === Status.idle && (
         <div className="rounded-lg shadow-md overflow-x-auto">
-        <table className="w-full text-sm rtl:text-right text-gray-500">
-          <WorkHeader />
-          <WorkTimeTable />
-        </table>
+            <table className="w-full text-sm rtl:text-right text-gray-500">
+              <WorkHeader />
+              <WorkTimeTable />
+            </table>
         </div>
       )}
         {status === Status.loading && (
