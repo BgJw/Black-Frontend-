@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Typography, Input, Button } from "@material-tailwind/react";
 import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
+import { SERVER_PORT } from "../api/handleApiRequest";
 
 export const SignIn = () => {
     const [department, setDepartment] = useState("");
@@ -19,7 +20,7 @@ export const SignIn = () => {
         e.preventDefault();
         setError(null);
     
-        const res = await fetch('http://localhost:5000/auth/login', {
+        const res = await fetch(`${SERVER_PORT}/auth/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
