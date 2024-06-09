@@ -8,8 +8,8 @@ import { WorkHeader } from "../workHeader";
 import { WorkTimeTable } from "../workTimeTable";
 import Link from "next/link";
 import { fetchActiveSession } from "@/app/api/session";
-import { Spinner } from "flowbite-react";
 import { update } from "@/slices/notificationSlice";
+import { Spinner } from "@material-tailwind/react";
 
 const ScheduleList = () => {
   const { month, year, status } = useAppSelector((store) => store.scheduleSlice);
@@ -51,7 +51,7 @@ const ScheduleList = () => {
       )}
         {status === Status.loading && (
           <div className="flex justify-center items-center">
-              <Spinner />
+              <Spinner  />
           </div>
         )}
         {status === Status.error && (

@@ -1,11 +1,10 @@
 'use client'
-import { Accordion, AccordionHeader, AccordionBody, List, ListItem, ListItemPrefix } from "@material-tailwind/react";
+import { Accordion, AccordionHeader, AccordionBody, List, ListItem, ListItemPrefix, Spinner } from "@material-tailwind/react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { FC, MouseEvent, useEffect, useState } from 'react';
 import Icons from './Icons';
-import { Spinner } from "flowbite-react";
 import SideBarItemTask from "./SideBarItemTask";
 
 interface SidebarItemProps {
@@ -63,11 +62,11 @@ const SidebarItem: FC<SidebarItemProps> = ({ link, name, tasks, open, handleOpen
                     <ListItemPrefix>
                         <Icons name={link} />
                     </ListItemPrefix>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-4">
                         <span className="mr-1 font-normal sm:text-base text-xs">
                             {name}
                         </span>
-                        {loading && <Spinner className="w-4 h-4 flex items-center" />}
+                        {loading && <Spinner className="w-4 h-4" />}
                     </div>
                 </AccordionHeader>
             </ListItem>
