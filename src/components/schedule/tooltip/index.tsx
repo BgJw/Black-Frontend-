@@ -1,7 +1,7 @@
 import { Tooltip } from "@material-tailwind/react";
 import { IEmployees } from "../../../slices/types";
 import React, { useState } from "react";
-import useDaysArrayInMonth from "@/components/hooks/useDaysArrayInMonth";
+import useDaysArrayInMonth from "@/hooks/useDaysArrayInMonth";
 
 
 const TooltipWithHelperIcon = React.memo(({ employee }: { employee: IEmployees }) => {

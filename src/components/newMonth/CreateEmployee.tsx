@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import MyInput from '../myInput/MyInput';
+import MyInput from '../myInput';
 
 interface ICreateEmployee {
     addEmployee: (name: string, position: string) => void,

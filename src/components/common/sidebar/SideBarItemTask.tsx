@@ -29,7 +29,7 @@ const SideBarItemTask:FC<ISelectedItemProps> = ({tasks, link, handleOpen}) => {
             <ListItem
                 key={task.link}
                 onClick={() => {router.push(link + task.link); setLoading(true)}}
-                className={`md:text-sm text-xs ${pathName === link + task.link ? ' text-black bg-white': ' text-white'}`}
+                className={`md:text-sm text-xs hover:opacity-75 duration-200 ${pathName === link + task.link ? ' text-black bg-white hover:opacity-1': ' text-white'}`}
             >
                 <ListItemPrefix className={`transition-transform delay-200 ${
                         pathName === link + task.link ? " rotate-[360deg]" : ""

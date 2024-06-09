@@ -2,18 +2,17 @@
 
 import React, { useEffect } from "react";
 import { Status } from "../../../slices/types";
-import { useAppDispatch, useAppSelector } from "@/components/hooks/store";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { fetchMonth } from "../../../slices/scheduleSlice";
-import { WorkHeader } from "../workHeader/WorkHeader";
-import { WorkTimeTable } from "../workTimeTable/WorkTimeTable";
+import { WorkHeader } from "../workHeader";
+import { WorkTimeTable } from "../workTimeTable";
 import Link from "next/link";
 import { fetchActiveSession } from "@/app/api/session";
-
+import { Spinner } from "flowbite-react";
+import { update } from "@/slices/notificationSlice";
 
 const ScheduleList = () => {
-  const { month, year, status } = useAppSelector(
-    (store) => store.scheduleSlice
-  );
+  const { month, year, status } = useAppSelector((store) => store.scheduleSlice);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -30,6 +29,7 @@ const ScheduleList = () => {
           );
         } else {
           console.error("Error retrieving profile data");
+          dispatch(update("Error retrieving profile data please restart your application"))
         }
       } catch (error) {
         console.error("Error retrieving profile data", error);
@@ -51,7 +51,7 @@ const ScheduleList = () => {
       )}
         {status === Status.loading && (
           <div className="flex justify-center items-center">
-            <div className="w-12 h-12 bg-gray-200 rounded-full animate-spin"></div>
+              <Spinner />
           </div>
         )}
         {status === Status.error && (
@@ -60,13 +60,13 @@ const ScheduleList = () => {
           </div>
         )}
             {status === Status.notFound && (
-        <div className="flex justify-center items-center flex-col gap-2">
+        <div className="flex justify-center items-center flex-col gap-6">
           Month with name {month.name} and year {year} not found
           <Link 
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none" 
-            href={'schedule/newMonth'}>Nowy miésiąc</Link>
-          
-
+            href={'schedule/newMonth'}>
+              Nowy miésiąc
+          </Link>
         </div>
       )}
     </div>

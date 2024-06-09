@@ -1,5 +1,5 @@
 import { ISelectedItem } from "@/app/api/order";
-import { Quantity } from "../quantity/Quantity";
+import { Quantity } from "../quantity";
 import { Button } from "flowbite-react";
 
 import s from './SelectedItem.module.scss';

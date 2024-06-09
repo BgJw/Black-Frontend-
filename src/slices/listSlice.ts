@@ -35,7 +35,6 @@ const ListSlice = createSlice({
             if (day.numb < daysInCurrentMonth) {
                 state.day.numb += 1;
             } else {
-                // переход на следующий месяц
                 state.day.numb = 1;
                 state.month = (month + 1) % 12;
                 state.year = month === 11 ? year + 1 : year;
@@ -48,7 +47,6 @@ const ListSlice = createSlice({
             if (day.numb > 1) {
                 state.day.numb -= 1;
             } else {
-                // переход на предыдущий месяц
                 const prevMonth = month === 0 ? 11 : month - 1;
                 const prevYear = month === 0 ? year - 1 : year;
                 state.day.numb = new Date(prevYear, prevMonth + 1, 0).getDate();

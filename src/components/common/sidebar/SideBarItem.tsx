@@ -3,7 +3,7 @@ import { Accordion, AccordionHeader, AccordionBody, List, ListItem, ListItemPref
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
-import { MouseEvent, useEffect, useState } from 'react';
+import { FC, MouseEvent, useEffect, useState } from 'react';
 import Icons from './Icons';
 import { Spinner } from "flowbite-react";
 import SideBarItemTask from "./SideBarItemTask";
@@ -16,7 +16,7 @@ interface SidebarItemProps {
     handleOpen: (link: string) => void;
 }
 
-const SidebarItem: React.FC<SidebarItemProps> = ({ link, name, tasks, open, handleOpen }) => {
+const SidebarItem: FC<SidebarItemProps> = ({ link, name, tasks, open, handleOpen }) => {
     const [loading, setLoading] = useState(false);
     const pathName = usePathname();
     const router = useRouter();
@@ -53,7 +53,9 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ link, name, tasks, open, hand
                 />
             }
         >
-            <ListItem className={activeLink ? "p-0 text-black bg-white" :'p-0 text-white'} selected={open}>
+            <ListItem
+                className={`p-0 hover:opacity-75 duration-200 ${activeLink? 'text-black bg-white hover:opacity-1': 'text-white'}`} 
+                selected={open}>
                 <AccordionHeader
                     onClick={(e) => nextPage(e, link)}
                     className="border-b-0 p-3"
@@ -62,9 +64,9 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ link, name, tasks, open, hand
                         <Icons name={link} />
                     </ListItemPrefix>
                     <div className="flex items-center gap-2">
-                    <span className="mr-1 font-normal sm:text-base text-xs">
-                        {name}
-                    </span>
+                        <span className="mr-1 font-normal sm:text-base text-xs">
+                            {name}
+                        </span>
                         {loading && <Spinner className="w-4 h-4 flex items-center" />}
                     </div>
                 </AccordionHeader>

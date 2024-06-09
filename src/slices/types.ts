@@ -30,5 +30,6 @@ export interface IScheduleSlice {
         numb: number
     },
     status: Status,
-    personel: IPersonel
+    personel: IPersonel,
+    reservedEmployees: IEmployees[],
 }

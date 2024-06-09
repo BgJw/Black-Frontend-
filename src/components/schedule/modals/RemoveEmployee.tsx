@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from '@/components/hooks/store';
+import { useAppDispatch, useAppSelector } from '@/hooks/store';
 import { useState, useRef, Dispatch, SetStateAction } from 'react';
 import { IEmployees } from '../../../slices/types';
 import { removeEmployee } from '@/app/api/employee';

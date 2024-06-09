@@ -1,10 +1,10 @@
 "use client"
 import { Tooltip } from "@material-tailwind/react";
 import { resetMonth } from "../../../slices/scheduleSlice";
-import { useAppDispatch, useAppSelector } from "@/components/hooks/store";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import dynamic from "next/dynamic";
-import useModal from "@/components/hooks/useModal";
-import AutomaticTimeFilling from "../automaticTimeFilling/AutomaticTimeFilling";
+import useModal from "@/hooks/useModal";
+import AutomaticTimeFilling from "../automaticTimeFilling";
 import { Status } from "@/slices/types";
 
 const DynamicModalAddEmployee = dynamic(() => import('../modals/AddEmployee'), {
@@ -30,7 +30,7 @@ const IconControls = () => {
                 addEmployeeModal.isOpen && <DynamicModalAddEmployee changeModal={addEmployeeModal.closeModal} />
             }
             {
-            removeEmployeeModal.isOpen && <DynamicModalRemoveEmployee changeModal={removeEmployeeModal.closeModal} />
+                removeEmployeeModal.isOpen && <DynamicModalRemoveEmployee changeModal={removeEmployeeModal.closeModal} />
             }
             {
                 status === Status.idle && 

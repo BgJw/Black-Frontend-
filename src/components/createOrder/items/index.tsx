@@ -1,5 +1,5 @@
 import { ISelectedItem } from "@/app/api/order";
-import SelectedItem from "../selectedItem/SelectedItem"
+import SelectedItem from "../selectedItem"
 import { memo } from "react";
 
 interface IItems {

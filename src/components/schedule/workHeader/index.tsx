@@ -1,9 +1,9 @@
-import { useAppSelector } from "@/components/hooks/store";
+import { useAppSelector } from "@/hooks/store";
 import dynamic from "next/dynamic";
 
 
 
-const DynamicTooltipWithHelperIcon = dynamic(() => import('../tooltip/TooltipForEmployee'), {
+const DynamicTooltipWithHelperIcon = dynamic(() => import('../tooltip'), {
   ssr: false,
   loading: () => <p>Loading...</p>,
 });

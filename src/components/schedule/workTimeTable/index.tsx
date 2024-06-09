@@ -1,12 +1,12 @@
 'use client'
-import { useAppSelector } from '@/components/hooks/store';
-import useDaysArrayInMonth from '@/components/hooks/useDaysArrayInMonth';
+import { useAppSelector } from '@/hooks/store';
+import useDaysArrayInMonth from '@/hooks/useDaysArrayInMonth';
 import { getDayOfWeek } from '@/helpers/isWeekend';
 import React from 'react'
 import dynamic from 'next/dynamic';
 
 
-const DynamicWorkCell = dynamic( () => import('../workCell/WorkCell'), {
+const DynamicWorkCell = dynamic( () => import('../workCell'), {
   loading: () => <td>Loading...</td>,
 })
 export const WorkTimeTable = () => {

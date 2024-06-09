@@ -2,17 +2,17 @@
 import React, { useState } from 'react';
 import { IEmployees, IPersonel } from '../../../slices/types';
 import Header from '@/components/newMonth/Header';
-import MyInput from '@/components/myInput/MyInput';
-import { useAppDispatch, useAppSelector } from '@/components/hooks/store';
-import MySelect from '@/components/mySelect/MySelect';
+import MyInput from '@/components/myInput';
+import { useAppDispatch, useAppSelector } from '@/hooks/store';
+import MySelect from '@/components/mySelect';
 import { monthNames } from '../../../slices/scheduleSlice';
 import CreateEmployee from '@/components/newMonth/CreateEmployee';
 import ListsNewEmployee from '@/components/newMonth/ListsNewEmployee';
 import { Tooltip } from '@material-tailwind/react';
 import { addNewMonth } from '@/app/api/month';
 import { update } from '../../../slices/notificationSlice';
-import Notification from '@/components/notification/Notification';
-import useModal from '@/components/hooks/useModal';
+import Notification from '@/components/notification';
+import useModal from '@/hooks/useModal';
 import withAuth from '@/components/withAuth';
 import { fetchActiveSession } from '@/app/api/session';
 

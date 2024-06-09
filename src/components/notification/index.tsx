@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../hooks/store";
+import { useAppDispatch, useAppSelector } from "../../hooks/store";
 import { removeText } from "../../slices/notificationSlice";
 
 const Notification = () => {

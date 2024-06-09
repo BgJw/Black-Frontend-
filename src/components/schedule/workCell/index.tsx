@@ -4,7 +4,7 @@ import { IWorkTime } from "../../../slices/types";
 import React, { useState } from "react";
 import { addWorkDay, changeTime } from "@/app/api/employee";
 import { updateMonth } from "../../../slices/scheduleSlice";
-import { useAppDispatch, useAppSelector } from "@/components/hooks/store";
+import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { update } from "../../../slices/notificationSlice";
 
 

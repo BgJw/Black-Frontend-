@@ -1,16 +1,16 @@
 "use client";
 
-import { useAppSelector } from "@/components/hooks/store";
-import MyInput from "@/components/myInput/MyInput";
-import MySelect from "@/components/mySelect/MySelect";
-import Notification from "@/components/notification/Notification";
-import { Header } from "@/components/orders/header/Header";
-import { Items } from "@/components/orders/items/Items";
-import SelectForm from "@/components/orders/selectForm/SelectForm";
-import { SubmitForm } from "@/components/orders/submitForm/SubmitForm";
-import { TotalPrice } from "@/components/orders/totalPrice/TotalPrice";
-import { getDates } from "@/helpers/isWeekend";
 import { FC, useCallback, useState } from "react";
+import { useAppSelector } from "@/hooks/store";
+import { Header } from "@/components/createOrder/header";
+import MyInput from "@/components/myInput";
+import MySelect from "@/components/mySelect";
+import Notification from "@/components/notification";
+import { Items } from "@/components/createOrder/items";
+import SelectForm from "@/components/createOrder/selectForm";
+import { SubmitForm } from "@/components/createOrder/submitForm";
+import { TotalPrice } from "@/components/createOrder/totalPrice";
+import { getDates } from "@/helpers/isWeekend";
 import { ISelectedItem, PaidMethod } from "../api/order";
 import withAuth from "@/components/withAuth";
 

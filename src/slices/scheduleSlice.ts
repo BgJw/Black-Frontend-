@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { IPersonel, IScheduleSlice, Status } from "./types";
+import { IEmployees, IPersonel, IScheduleSlice, Status } from "./types";
 import { SERVER_PORT } from "@/app/api/handleApiRequest";
 
 interface Ifetch {
@@ -38,7 +38,8 @@ const initialState: IScheduleSlice = {
     },
     year: currentYear,
     status: Status.loading,
-    personel: {} as IPersonel
+    personel: {} as IPersonel,
+    reservedEmployees: []
 };
 
 
@@ -92,6 +93,9 @@ const ScheduleSlice = createSlice({
                     }
             }
         },
+        setReservedEmployees: (state, action: PayloadAction<IEmployees[]>) => {
+            state.reservedEmployees = action.payload;
+        },
     },
     extraReducers: builder => {
         builder.addCase(fetchMonth.pending, state => {
@@ -114,6 +118,6 @@ const ScheduleSlice = createSlice({
 
 });
 
-export const { prevMonth, nextMonth, resetMonth, updateMonth} = ScheduleSlice.actions;
+export const { prevMonth, nextMonth, resetMonth, updateMonth, setReservedEmployees} = ScheduleSlice.actions;
 
 export default ScheduleSlice.reducer;

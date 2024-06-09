@@ -16,6 +16,10 @@ $cell-min-width: 90px;
     text-decoration: none;
     list-style-type: none;
 }
+body{
+    position: relative;
+    margin-top: 69px;
+}
 .cell {
     width: $cell-width;
     max-width: $cell-max-width;
@@ -24,14 +28,6 @@ $cell-min-width: 90px;
     border: 1px solid black;
     text-align: center;
 
-}
-body{
-    position: relative;
-    margin-top: 69px;
-}
-.position {
-    display: grid;
-    grid-template-columns: minmax(100px, 160px) 1fr;
 }
 
 .input-error {
@@ -45,6 +41,7 @@ body{
 th{
     min-width: 100px;
 }
+
 @media screen and (max-width: 768px) {
     .cell {
         width: $cell-width - 20;

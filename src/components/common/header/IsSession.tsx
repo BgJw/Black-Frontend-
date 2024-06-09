@@ -28,18 +28,18 @@ const IsSession = () => {
   }, []); 
 
   return (
-    <div className="flex justify-end md:gap-40 gap-20 md:text-sm text-xs ">
+    <div className="flex items-center justify-end md:gap-40 gap-20 md:text-sm text-xs ">
       <small className="leading-6">
         Zalogowany: 
-        {department}
+        {"  " + department}
       </small>
       <button
         onClick={handleLogout}
-        className="leading-6 flex items-center gap-1">
-        <PowerIcon className="h-5 w-5" />
-        <span>
-          Log out
-        </span>
+        className="leading-6 flex items-center gap-1 hover:opacity-75 p-2 rounded duration-200">
+            <PowerIcon className="h-5 w-5" />
+            <span>
+              Log out
+            </span>
       </button>
     </div>
   )
