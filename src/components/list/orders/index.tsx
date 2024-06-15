@@ -4,28 +4,36 @@ import { IList, PaidMethod, getOrderByDay } from "@/app/api/order";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "@/hooks/store";
 import { fetchActiveSession } from "@/app/api/session";
-import { Chip, Typography } from "@material-tailwind/react";
+import { Chip, Spinner, Typography } from "@material-tailwind/react";
 
 const Orders = () => {
     const [orders, setOrders] = useState<IList[]>([]);
     const {day, month, year} = useAppSelector( state => state.listSlice );
-    
+    const [loading, setLoading] = useState(false);
         
-useEffect(() => {
+    useEffect(() => {
         const getSessionAndFetchMonth = async () => {
+            setLoading(true);
+            try {
                 const session = await fetchActiveSession();
                 if (session && session.username) {
                     const res = await getOrderByDay(day.numb, month, year, session.username);
                     setOrders(res);
+                    setLoading(false);
                 }
+            } catch (error) {
+                console.error('Error fetching orders:', error);
+                setLoading(false);
+            }
         }
         getSessionAndFetchMonth();
     }, [day.numb, month, year]);
 
-
+    
     return (
             <tbody>
-                {orders.map(({ amountToPay, cardOrCash, customerNumber, dateReceived, hour, receivedBy, whatReceived, whoMadeIt }, i) => {
+                {loading && <Spinner />}
+                {orders && orders.length > 0 && orders.map(({ amountToPay, cardOrCash, customerNumber, dateReceived, hour, receivedBy, whatReceived, whoMadeIt }, i) => {
   
                     return (
                         <tr key={i} className="even:bg-blue-gray-50/50">

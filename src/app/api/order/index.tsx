@@ -54,7 +54,7 @@ export const getOrderByDay = async (day: number, month: number, year: number, de
       if (response.ok) {
           const data = await response.json();
           
-          return await data.orders;
+          return await data;
       } else {
           console.error('Error fetching data:', response.statusText);
           throw new Error(response.statusText);

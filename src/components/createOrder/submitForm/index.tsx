@@ -1,7 +1,6 @@
 import { IList, addNewOrder, incrementClientNumber } from "@/app/api/order";
 import { useAppDispatch } from "@/hooks/store";
 import { update } from "@/slices/notificationSlice";
-import { nextOrderNumber } from "@/slices/ordersSlice";
 
 
   const namePropsOrder = {
@@ -92,7 +91,6 @@ export const SubmitForm = ({newOrder,  resetAll}: {newOrder: IList, resetAll: ()
         }
         
       });
-      dispatch(nextOrderNumber());
 
     }
 
