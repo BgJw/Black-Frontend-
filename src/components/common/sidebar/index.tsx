@@ -7,7 +7,7 @@ import SidebarItem from './SideBarItem';
 import { usePathname } from "next/navigation";
 
 const links = [
-    { link: '/createOrder', name: 'Zlecenia', tasks: [{link: '/newOrder', task:'Nowe Zlecenie'}] }, 
+    { link: '/createOrder', name: 'Zlecenie', tasks: [{link: '/newOrder', task:'Nowe Zlecenie'}] }, 
     { link: '/list', name: 'Zeszyt', tasks: [{link: '/search', task:'Wyszukaj'}] }, 
     { link: '/schedule', name: 'Grafik', tasks: [{link: '/newMonth', task:'Nowy miesiąc'}] }
 ];

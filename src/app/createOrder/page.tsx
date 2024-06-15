@@ -1,7 +1,6 @@
 "use client";
 
-import { FC, useCallback, useState } from "react";
-import { useAppSelector } from "@/hooks/store";
+import { FC, useCallback, useEffect, useState } from "react";
 import { Header } from "@/components/createOrder/header";
 import MyInput from "@/components/myInput";
 import MySelect from "@/components/mySelect";
@@ -11,7 +10,7 @@ import SelectForm from "@/components/createOrder/selectForm";
 import { SubmitForm } from "@/components/createOrder/submitForm";
 import { TotalPrice } from "@/components/createOrder/totalPrice";
 import { getDates } from "@/helpers/isWeekend";
-import { ISelectedItem, PaidMethod } from "../api/order";
+import { ISelectedItem, PaidMethod, fetchClientNumber } from "../api/order";
 import withAuth from "@/components/withAuth";
 
 
@@ -37,17 +36,8 @@ const listDates = getDates(new Date(), 30);
 
 
 const Orders: FC = () => {
-  const clientNumber = useAppSelector((state) => state.ordersSlice.customerNumber);
   
-  const [customerNumber, setCustomerNumber] = useState(
-    String(
-      clientNumber < 10
-        ? "00" + clientNumber
-        : clientNumber < 100
-        ? "0" + clientNumber
-        : clientNumber
-    )
-  );
+  const [customerNumber, setCustomerNumber] = useState<string>('');
   const [dateReceived, setDateReceived] = useState(
     new Date().getDate() +
       "/" +
@@ -99,6 +89,20 @@ const Orders: FC = () => {
         : clientNumber
     ));
   }
+
+  useEffect( () => {
+    fetchClientNumber()
+     .then((numb) => {
+        setCustomerNumber(String(
+          numb < 10
+            ? "00" + numb
+            : numb < 100
+            ? "0" + numb
+            : numb
+        ));
+      })
+      
+      }, [customerNumber])
   return (
     <div className="w-full mb-8 mt-8 relative">
       <Header />

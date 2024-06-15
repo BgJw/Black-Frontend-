@@ -65,4 +65,25 @@ export const getOrderByDay = async (day: number, month: number, year: number, de
   }
 };
 
+export const fetchClientNumber = async () => {
+    try {
+      const response = await fetch(`${SERVER_PORT}/dataHub/customerNumber`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch customer number');
+      }
+      const data = await response.json();
+      return data.customerNumber;
+    } catch (error) {
+      console.error('Error fetching customer number:', error);
+    }
+}
+
+export const incrementClientNumber = async () => {
+    try {
+        return await handleApiRequest(`${SERVER_PORT}/dataHub/customerNumber`, 'POST', {} );
+    } catch (error) {
+        return {success: false, message: String(error) };
+    }
+
+}
 

@@ -1,4 +1,4 @@
-import { IList, addNewOrder } from "@/app/api/order";
+import { IList, addNewOrder, incrementClientNumber } from "@/app/api/order";
 import { useAppDispatch } from "@/hooks/store";
 import { update } from "@/slices/notificationSlice";
 import { nextOrderNumber } from "@/slices/ordersSlice";
@@ -86,8 +86,11 @@ export const SubmitForm = ({newOrder,  resetAll}: {newOrder: IList, resetAll: ()
       const req = addNewOrder(body)
       
       req.then(res => {
-        if(res.success)
-          dispatch(update(res.message))
+        if(res.success) {
+          incrementClientNumber();
+          dispatch(update(res.message));
+        }
+        
       });
       dispatch(nextOrderNumber());
 
