@@ -29,8 +29,6 @@ const hours = [
   "20:00",
 ];
 
-const paymendMethode = ['Gotówka', 'Karta', 'Do zapłaty'];
-
 const listDates = getDates(new Date(), 30);
 
 
@@ -81,13 +79,7 @@ const Orders: FC = () => {
         "/" +
         new Date().getFullYear());
 
-        setCustomerNumber(String(
-      clientNumber < 10
-        ? "00" + clientNumber
-        : clientNumber < 100
-        ? "0" + clientNumber
-        : clientNumber
-    ));
+        setCustomerNumber(customerNumber);
   }
 
   useEffect( () => {
@@ -139,7 +131,7 @@ const Orders: FC = () => {
             <MySelect
               name={"Metoda oplaty"}
               setValue={setCardOrCashProps}
-              options={paymendMethode}
+              options={['Gotówka', 'Karta', 'Do zapłaty']}
             />
             <MySelect
               name={"Na kiedy ?"}
