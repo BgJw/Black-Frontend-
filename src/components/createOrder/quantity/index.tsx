@@ -1,21 +1,22 @@
-import { ChangeEventHandler, useEffect, useState } from "react";
+import { ISelectedItem } from "@/app/api/order";
+import { ChangeEventHandler, memo, useEffect, useState } from "react";
 
 interface IQuantity {
-  id: number;
+  item: ISelectedItem;
   increaseItemCount: (id: number, quantity: string) => void;
 }
 
-export const Quantity = ({id, increaseItemCount}: IQuantity) => {
-  const [quantity, setQuantity] = useState('1');
+export const Quantity = memo(({item, increaseItemCount}: IQuantity) => {
+  const [quantity, setQuantity] = useState(item.numb || '1');
 
-
+  
   const validateInput:ChangeEventHandler<HTMLInputElement> = (e) => {
     const inputValue = e.target.value.trim();
 
     if (inputValue === "" || /^(\d*\.?\d+|\d+\.?\d*|\d*\.?\d+)$/.test(inputValue)) {
         const newValue = inputValue === "0" ? "" : inputValue; 
         setQuantity(newValue);
-        increaseItemCount(id, newValue);
+        increaseItemCount(item.id, newValue);
     }
   }
   const decrementFloatNumber = (numb: string) => {
@@ -42,7 +43,7 @@ const incrementFloatNumber = (numb: string) => {
     }
 }
 
-    useEffect( () => increaseItemCount(id, quantity), [quantity]);
+useEffect( () => increaseItemCount(item.id, quantity), [quantity]);
     
   return (
     <div className="max-w-xs ml-auto">
@@ -109,4 +110,4 @@ const incrementFloatNumber = (numb: string) => {
       </div>
     </div>
   );
-};
+});

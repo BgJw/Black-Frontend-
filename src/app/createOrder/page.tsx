@@ -12,6 +12,8 @@ import { TotalPrice } from "@/components/createOrder/totalPrice";
 import { getDates } from "@/helpers/isWeekend";
 import { ISelectedItem, PaidMethod, fetchClientNumber } from "../api/order";
 import withAuth from "@/components/withAuth";
+import { Button } from "@material-tailwind/react";
+import { StepperWithDots } from "@/components/steper";
 
 
 const hours = [
@@ -49,7 +51,9 @@ const Orders: FC = () => {
   const [amountToPay, setAmountToPay] = useState("");
   const [cardOrCash, setCardOrCash] = useState('' as PaidMethod);
   const [selectedItems, setSelectedItems] = useState<ISelectedItem[]>([]);
-    
+  const [nextStep, setNextStep] = useState(0);
+  const [error, setError] = useState(false);
+
   const newOrder = {
     dateReceived,
     whatReceived: selectedItems,
@@ -82,6 +86,19 @@ const Orders: FC = () => {
         setCustomerNumber(customerNumber);
   }
 
+ const handleNextStep = () => {
+    if (nextStep === 0 && selectedItems.length === 0) {
+      setError(true);
+      return;
+    }
+    setError(false);
+    setNextStep(nextStep + 1);
+  };
+
+  const handlePrevStep = () => {
+    setNextStep(nextStep - 1);
+  };
+
   useEffect( () => {
     fetchClientNumber()
      .then((numb) => {
@@ -95,62 +112,105 @@ const Orders: FC = () => {
       })
       
       }, [customerNumber])
-  return (
-    <div className="w-full mb-8 mt-8 relative">
-      <Header />
-      <div className="w-[80%] p-2 m-auto flex flex-col ">
-        <div className="flex flex-col-reverse md:grid gap-4 mb-2 md:grid-cols-3 justify-items-center">
-          <SelectForm 
-            selectedItems={selectedItems} 
-            setSelectedItems={setSelectedItems} 
-          />
 
+      useEffect( () => {
+        if (selectedItems.length < 1) {
+          setError(true);
+        } else {
+          setError(false);
+        }
+      }, [selectedItems.length]);
+
+
+      
+  return (
+    <div className="w-full relative mb-2">
+      <Header />
+      <StepperWithDots step={nextStep} error={error}  />
+      <div className="w-full p-3 flex flex-wrap justify-center gap-2">
+        {
+          nextStep === 0 && (
+            <div className="flex flex-wrap items-center justify-center md:w-[80%]">
+              <div className="flex flex-wrap w-full gap-2 p-2">
+                  <SelectForm 
+                      selectedItems={selectedItems} 
+                      setSelectedItems={setSelectedItems} 
+                  />
+                  <Items 
+                    selectedItems={selectedItems} 
+                    setSelectedItems={setSelectedItems} 
+                    />
+              </div>
+              <Button className={`${error? 'bg-red-600': 'bg-green-600'} min-w-36 duration-100 delay-100 transition-all`}
+                    onClick={ handleNextStep }>
+                      {error ? 
+                        'Wybierz co najmniej jedną pozycję'
+                        : 
+                        'Dalej'
+                      }
+              </Button>
+            </div>
+          )
+        }
+        {
+          nextStep === 1 && (
+      <div className="flex flex-wrap items-center justify-center md:w-[80%]">
+        <div className="flex justify-center gap-2 w-full">
           <MyInput
-            name={"Data przyjęcia"}
-            setValue={setDateReceived}
-            value={dateReceived}
+              name={"Nr klienta"}
+              setValue={setCustomerNumber}
+              value={customerNumber}
+              disabled={true}
           />
           <MyInput
-            name={"Nr klienta"}
-            setValue={setCustomerNumber}
-            value={customerNumber}
-            disabled={true}
+              name={"Data przyjęcia"}
+              setValue={setDateReceived}
+              value={dateReceived}
           />
         </div>
-        <div className="grid gap-4 mb-2 lg:grid-cols-3 grid-cols-1">
-          <Items 
-            selectedItems={selectedItems} 
-            setSelectedItems={setSelectedItems} />
-          
-          <div className="grid md:grid-cols-2 gap-4 col-span-2 items-center">
+        <div className="flex justify-center gap-2 w-full">
             <MyInput
-              name={"Kto przyjąl"}
-              setValue={setReceivedBy}
-              value={receivedBy}
-            />
-            <MySelect
-              name={"Metoda oplaty"}
-              setValue={setCardOrCashProps}
-              options={['Gotówka', 'Karta', 'Do zapłaty']}
-            />
+                name={"Kto przyjąl"}
+                setValue={setReceivedBy}
+                value={receivedBy}
+              />
             <MySelect
               name={"Na kiedy ?"}
               setValue={setForWhen}
               options={listDates}
             />
-            <MySelect
-              name={"Godzina odbioru"}
-              setValue={setHour}
-              options={hours}
-            />
-          </div>
         </div>
-        <TotalPrice items={selectedItems} setAmountToPay={setAmountToPay} />
-        <SubmitForm newOrder={newOrder} resetAll={resetAll}/>
+        <div className="flex justify-center gap-2 w-full">
+        <MySelect
+            name={"Metoda oplaty"}
+            setValue={setCardOrCashProps}
+            options={['Gotówka', 'Karta', 'Do zapłaty']}
+          />
+          <MySelect
+            name={"Godzina odbioru"}
+            setValue={setHour}
+            options={hours}
+          />
+        </div>
+        <div className="grid justify-center w-full">
+            <TotalPrice items={selectedItems} setAmountToPay={setAmountToPay} />
+            <div className="flex gap-2">
+              <Button
+                  className=" bg-teal-500" 
+                  onClick={ handlePrevStep }>
+                  Wstecz
+              </Button>
+              <SubmitForm newOrder={newOrder} resetAll={resetAll}/>
+            </div>
+        </div>
+      </div>
+
+          )
+        }
       </div>
       <Notification />
     </div>
-  );
+  )
 };
 
 export default withAuth(Orders);

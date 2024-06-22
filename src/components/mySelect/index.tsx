@@ -14,7 +14,7 @@ const MySelect = memo(({ name, options, setValue }: IMySelect) => {
 }
 
   return (
-    <div className="max-w-sm mb-2 w-full">
+    <div className="max-w-sm w-full ">
       <label
         htmlFor={name}
         className="block mb-2 text-sm font-medium text-gray-900 cursor-pointer"
@@ -24,7 +24,7 @@ const MySelect = memo(({ name, options, setValue }: IMySelect) => {
       <select
         id={name}
         defaultValue={''}
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-pointer"
+        className="bg-gray-50 md:h-10 h-8 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full cursor-pointer"
         onChange={onChange}
       >
         <option value={''} disabled>{name}</option>

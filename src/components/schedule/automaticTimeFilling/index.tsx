@@ -40,7 +40,7 @@ const AutomaticTimeFilling = forwardRef<HTMLButtonElement>((props, ref) => {
 
     const updateList = async (employees: IEmployees[]) => {
         const newEmployees = employees.map((employee, index) => {
-            const initialShift = index % 2 === 0 ? '9-17' : '13-21'; // Чередование начальных смен по индексу сотрудника
+            const initialShift = index % 2 === 0 ? '9-17' : '13-21';
             let currentShift = initialShift;
             let currentWeek = -1;
     

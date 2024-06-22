@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Typography, Input, Button } from "@material-tailwind/react";
 import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
-import { SERVER_PORT } from "../api/handleApiRequest";
+import { signInUser } from "../api/session";
 
 const SignIn = () => {
     const [department, setDepartment] = useState("");
@@ -19,17 +19,7 @@ const SignIn = () => {
         e.preventDefault();
         setError(null);
     
-        const res = await fetch(`${SERVER_PORT}/auth/login`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username: department,
-            password: password
-        }),
-        
-        })
+        const res = await signInUser(department, password);
         
         if (res.ok) {
           const data = await res.json();
@@ -45,7 +35,7 @@ const SignIn = () => {
   return (
     <section className="absolute top-0 right-0 left-0 bottom-0 grid text-center items-center p-8">
 
-      <aside className="absolute right-0 -top-8 rounded-md border p-2 text-left">
+      <aside className="absolute right-0 -top-14 rounded-md border p-2 text-left text-xs md:text-sm">
           <h2 className="text-center">Test</h2>
           <p>Department: Zaspa</p>
           <p>Password: password</p>

@@ -26,7 +26,7 @@ const Notification = () => {
         <>
             {message.length > 0 && (
                 <div
-                    className={`fixed right-3 md:w-full w-[200px] max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-400 z-50 transition-all duration-1000  ${
+                    className={`fixed right-3 md:w-full max-w-xs p-2 text-gray-500 bg-white rounded-lg shadow-lg dark:bg-gray-800 dark:text-gray-400 z-50 transition-all duration-1000  ${
                         animation ? 'top-20' : 'top-0'
                     }`}
                     role="alert"
@@ -52,7 +52,7 @@ const Notification = () => {
                         </div>
                         <div className="ms-3 text-sm font-normal">
                             <span className="mb-1 text-sm font-semibold text-gray-900 dark:text-white">Update</span>
-                            <div className="mb-2 md:text-sm text-xs font-normal">{message}</div>
+                            <div className="md:text-sm text-xs font-normal">{message}</div>
                         </div>
                     </div>
                 </div>

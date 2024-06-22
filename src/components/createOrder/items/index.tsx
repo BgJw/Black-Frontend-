@@ -16,16 +16,24 @@ export const Items = memo(({selectedItems, setSelectedItems}: IItems) => {
           newItems[index].numb = quantity;
           setSelectedItems(newItems);
         }
-      } 
+      };
+       
       const removeSelectedItems = (itemId: number) => {
         const newList = selectedItems.slice().filter( items => items.id !== itemId)
         setSelectedItems( newList );
-      }
+      };
       
   return (
     <div
-        className="max-w-sm grid items-start gap-2"
+        className="grid items-start gap-2 w-full"
         style={{ gridTemplateRows: "repeat(auto-fill, 30px)" }}>
+          {
+            selectedItems.length === 0 && (
+              <div className="text-center text-gray-500">
+                <p>Brak</p>
+              </div>
+            )
+          }
           {
             selectedItems.map( item => (
               <SelectedItem 

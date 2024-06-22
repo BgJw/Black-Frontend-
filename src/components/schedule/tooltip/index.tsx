@@ -81,13 +81,15 @@ const TooltipWithHelperIcon = React.memo(({ employee }: { employee: IEmployees }
 
     return (
         <Tooltip
+        className="bg-transparent"
+            placement='bottom'
             content={
-                <div className="overflow-auto max-w-96 bg-white drop-shadow p-3 shadow-lg rounded-md">
+                <div className="bg-white p-2 rounded-md z-50">
                     <span className="font-bold text-black">
                         {name}
                     </span>
                     <div
-                        className="font-medium opacity-80 text-black mt-1 flex flex-col gap-y-2"
+                        className="font-medium opacity-90 text-black flex flex-col mt-1"
                     >
                         <span>
                             Pozycja: <strong>{position}</strong> 
@@ -96,7 +98,7 @@ const TooltipWithHelperIcon = React.memo(({ employee }: { employee: IEmployees }
                             Przepracowano w tym ms: <strong>{work_Hours} godz</strong> 
                         </span>
                         <span>
-                            Wykorzystano urlopow: <strong>{vacation}</strong> 
+                            Wykorzystano urlopów: <strong>{vacation}</strong> 
                         </span>
                         <span>
                             Dni wolne od pracy: <strong>{holidays}</strong> 
@@ -105,7 +107,7 @@ const TooltipWithHelperIcon = React.memo(({ employee }: { employee: IEmployees }
                             Chorobowe: <strong>{sickLeave}</strong> 
                         </span>
                         <span>
-                            Wyplata w tym ms: <strong>{salary} zł</strong> 
+                            Wyplata: <strong>{salary} zł</strong> 
                         </span>
                         <span>
                             Nie uwzgednionych dni: <strong>{notRegistred}</strong> 

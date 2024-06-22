@@ -1,5 +1,5 @@
 import { ISelectedItem } from "@/app/api/order";
-import { ChangeEventHandler, memo, useCallback } from "react";
+import { ChangeEventHandler, memo, useCallback, useState } from "react";
 
 const listThings = [
     {
@@ -141,6 +141,7 @@ interface ISelectForm {
 
 }
 const SelectForm = memo(({selectedItems, setSelectedItems  }: ISelectForm) => {
+  const [selectedValue, setSelectedValue] = useState('');
     const listName = listThings.map((item) => item.name);
     const handleSelectChange: ChangeEventHandler<HTMLSelectElement> = useCallback((e) => {
     
@@ -148,12 +149,13 @@ const SelectForm = memo(({selectedItems, setSelectedItems  }: ISelectForm) => {
         
         if(newItems && !selectedItems.find( items => items.name === newItems.name)){
             setSelectedItems([...selectedItems, {...newItems, numb: '1'} as ISelectedItem]);
+            setSelectedValue('');
         }
       },[selectedItems]);
 
 
   return (
-    <div className="max-w-sm mb-2 w-full">
+    <div className="mb-2 w-full">
       <label
         htmlFor={'Co przyjęte'}
         className="block mb-2 text-sm font-medium text-gray-900 cursor-pointer"
@@ -162,9 +164,12 @@ const SelectForm = memo(({selectedItems, setSelectedItems  }: ISelectForm) => {
       </label>
       <select
         id={'Co przyjęte'}
-        defaultValue={''}
+        value={selectedValue}
         className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-pointer"
-        onChange={handleSelectChange}
+        onChange={(e) => {
+          setSelectedValue(e.target.value);
+          handleSelectChange(e);
+      }}
       >
         <option value={''} disabled>Co przyjęte</option>
         {listName.map((option) => (

@@ -1,6 +1,8 @@
 import { IList, addNewOrder, incrementClientNumber } from "@/app/api/order";
+import { fetchActiveSession } from "@/app/api/session";
 import { useAppDispatch } from "@/hooks/store";
 import { update } from "@/slices/notificationSlice";
+import { Button } from "@material-tailwind/react";
 
 
   const namePropsOrder = {
@@ -25,7 +27,7 @@ import { update } from "@/slices/notificationSlice";
 export const SubmitForm = ({newOrder,  resetAll}: {newOrder: IList, resetAll: () => void}) => {
   const dispatch = useAppDispatch();
 
-    const sendDate = (newOrder: IList) => {
+    const sendDate = async (newOrder: IList) => {
       const {dateReceived, whatReceived, customerNumber, receivedBy, amountToPay, paid, cardOrCash, hour, forWhen, whoMadeIt } = newOrder
 
       naming.forEach(fieldName => {
@@ -56,15 +58,14 @@ export const SubmitForm = ({newOrder,  resetAll}: {newOrder: IList, resetAll: ()
       if (!dateReceived || !whatReceived || !customerNumber || !receivedBy || !amountToPay || !hour || !forWhen) {
         
         dispatch(update('Proszę wypełnić wszystkie wymagane pola'))
-        // resetAll()
         return;
     } else {
       const day = +forWhen.split('/')[0];
       const month = +forWhen.split('/')[1];
       const year = +forWhen.split('/')[2];
-
+      const {username} = await fetchActiveSession();
       const body = {
-        department: 'Zaspa',
+        department: username,
         day,
         month,
         year,
@@ -78,7 +79,7 @@ export const SubmitForm = ({newOrder,  resetAll}: {newOrder: IList, resetAll: ()
           cardOrCash,
           hour,
           forWhen,
-          weight:' kg',
+          weight:'kg',
           whoMadeIt,
         }],
       }
@@ -88,6 +89,7 @@ export const SubmitForm = ({newOrder,  resetAll}: {newOrder: IList, resetAll: ()
         if(res.success) {
           incrementClientNumber();
           dispatch(update(res.message));
+          resetAll();
         }
         
       });
@@ -97,11 +99,12 @@ export const SubmitForm = ({newOrder,  resetAll}: {newOrder: IList, resetAll: ()
   }
 
   return (
-    <button
+    <Button
       onClick={ () => sendDate(newOrder)}
-      className="w-1/2 m-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      color={'green'}
+      className="hover:bg-green-400"
     >
       Zapisz
-    </button>
+    </Button>
     )
 }
