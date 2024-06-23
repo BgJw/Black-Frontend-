@@ -16,7 +16,6 @@
 - **Tailwind CSS**: A utility-first CSS framework.
 - **Material Tailwind**: Material Design components for Tailwind CSS.
 - **Heroicons**: Beautiful hand-crafted SVG icons.
-- **Flowbite React**: UI components built with Tailwind CSS.
 
 ## 📋 Installation
 
