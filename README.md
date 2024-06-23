@@ -10,16 +10,13 @@
 
 ## 🛠️ Tech Stack
 
-### Frontend:
-- **Next.js**
-- **TypeScript**
-- **Redux**
-- **Tailwind CSS**
-
-### Backend:
-- **Nest.js**
-- **MongoDB**
-- **JWT (JSON Web Token)**
+- **Next.js**: A React framework for production.
+- **TypeScript**: A superset of JavaScript that adds static typing.
+- **Redux**: A predictable state container for JavaScript apps.
+- **Tailwind CSS**: A utility-first CSS framework.
+- **Material Tailwind**: Material Design components for Tailwind CSS.
+- **Heroicons**: Beautiful hand-crafted SVG icons.
+- **Flowbite React**: UI components built with Tailwind CSS.
 
 ## 📋 Installation
 
@@ -49,8 +46,3 @@ The development server will be running at `http://localhost:3000`.
 ## 🌍 Live Demo
 
 Check out the live demo here: [System Pralniczy](https://black-frontend.vercel.app/)
-
-## 📚 API Documentation
-
-The backend API documentation can be accessed once the backend server is running. Make sure to check the backend repository for more details.
-
