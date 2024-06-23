@@ -28,7 +28,7 @@ export const SubmitForm = ({newOrder,  resetAll}: {newOrder: IList, resetAll: ()
   const dispatch = useAppDispatch();
 
     const sendDate = async (newOrder: IList) => {
-      const {dateReceived, whatReceived, customerNumber, receivedBy, amountToPay, paid, cardOrCash, hour, forWhen, whoMadeIt } = newOrder
+      const {dateReceived, whatReceived, customerNumber, receivedBy, amountToPay, paid, cardOrCash, hour, forWhen, whoMadeIt, _id } = newOrder
 
       naming.forEach(fieldName => {
         document.getElementById(fieldName)?.classList.remove('input-error');
@@ -64,11 +64,13 @@ export const SubmitForm = ({newOrder,  resetAll}: {newOrder: IList, resetAll: ()
       const month = +forWhen.split('/')[1];
       const year = +forWhen.split('/')[2];
       const {username} = await fetchActiveSession();
+
       const body = {
         department: username,
         day,
         month,
         year,
+        _id: '',
         orders: [{
           dateReceived,
           whatReceived,
@@ -81,6 +83,7 @@ export const SubmitForm = ({newOrder,  resetAll}: {newOrder: IList, resetAll: ()
           forWhen,
           weight:'kg',
           whoMadeIt,
+          _id,
         }],
       }
       const req = addNewOrder(body)

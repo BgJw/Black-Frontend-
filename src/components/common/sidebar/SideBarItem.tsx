@@ -62,8 +62,8 @@ const SidebarItem: FC<SidebarItemProps> = ({ link, name, tasks, open, handleOpen
                     <ListItemPrefix>
                         <Icons name={link} />
                     </ListItemPrefix>
-                    <div className="flex items-center gap-4">
-                        <span className="mr-1 font-normal sm:text-base text-xs">
+                    <div className="flex items-center gap-2">
+                        <span className="mr-1 font-normal sm:text-sm text-xs whitespace-nowrap overflow-hidden text-ellipsis">
                             {name}
                         </span>
                         {loading && <Spinner className="w-4 h-4" />}

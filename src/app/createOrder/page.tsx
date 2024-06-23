@@ -66,24 +66,37 @@ const Orders: FC = () => {
     whoMadeIt: '',
     hour,
     forWhen,
+    _id: ''
   };
 
   const setCardOrCashProps = useCallback((value: string) =>{ setCardOrCash(value as PaidMethod)}, [setCardOrCash, cardOrCash]);
 
-  const resetAll = () =>{
-      setHour('');
-      setForWhen('');
-      setReceivedBy('');
-      setAmountToPay('');
-      setCardOrCashProps('');
-      setSelectedItems([]);
-      setDateReceived(new Date().getDate() +
-        "/" +
-        (new Date().getMonth() + 1) +
-        "/" +
-        new Date().getFullYear());
+  const resetAll = async () => {
+    setNextStep(0);
+    setHour('');
+    setForWhen('');
+    setReceivedBy('');
+    setAmountToPay('');
+    setCardOrCashProps('');
+    setSelectedItems([]);
+    setDateReceived(new Date().getDate() +
+      "/" +
+      (new Date().getMonth() + 1) +
+      "/" +
+      new Date().getFullYear());
 
-        setCustomerNumber(customerNumber);
+    try {
+      const numb = await fetchClientNumber();
+      setCustomerNumber(String(
+        numb < 10
+          ? "00" + numb
+          : numb < 100
+            ? "0" + numb
+            : numb
+      ));
+    } catch (error) {
+      console.error("Error fetching client number:", error);
+    }
   }
 
  const handleNextStep = () => {
@@ -99,6 +112,7 @@ const Orders: FC = () => {
     setNextStep(nextStep - 1);
   };
 
+
   useEffect( () => {
     fetchClientNumber()
      .then((numb) => {
@@ -111,7 +125,7 @@ const Orders: FC = () => {
         ));
       })
       
-      }, [customerNumber])
+      }, [selectedItems.length])
 
       useEffect( () => {
         if (selectedItems.length < 1) {
@@ -119,6 +133,8 @@ const Orders: FC = () => {
         } else {
           setError(false);
         }
+
+
       }, [selectedItems.length]);
 
 
@@ -139,7 +155,7 @@ const Orders: FC = () => {
                   <Items 
                     selectedItems={selectedItems} 
                     setSelectedItems={setSelectedItems} 
-                    />
+                  />
               </div>
               <Button className={`${error? 'bg-red-600': 'bg-green-600'} min-w-36 duration-100 delay-100 transition-all`}
                     onClick={ handleNextStep }>

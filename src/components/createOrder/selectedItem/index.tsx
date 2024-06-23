@@ -5,8 +5,8 @@ import { Button } from "flowbite-react";
 
 interface ISelectedItemProps {
   item: ISelectedItem;
-  increaseItemCount: (id: number, quantity: string) => void;
-  removeSelectedItems: (itemId: number) => void
+  increaseItemCount: (id: string, quantity: string) => void;
+  removeSelectedItems: (itemId: string) => void
 }
 
 const SelectedItem = ({ item, increaseItemCount, removeSelectedItems }: ISelectedItemProps) => {
@@ -18,7 +18,7 @@ const SelectedItem = ({ item, increaseItemCount, removeSelectedItems }: ISelecte
           size="xs" 
           color='failure' 
           className='max-w-xs max-h-xs -p-2' 
-          onClick={ () => removeSelectedItems(item.id) }>
+          onClick={ () => removeSelectedItems(item._id) }>
         X
       </Button>
       <span className="inline-block max-w-sm whitespace-nowrap overflow-hidden text-ellipsis" 

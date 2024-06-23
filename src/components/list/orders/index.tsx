@@ -11,7 +11,7 @@ const Orders = () => {
     const [orders, setOrders] = useState<IList[]>([]);
     const {day, month, year} = useAppSelector( state => state.listSlice );
     const [loading, setLoading] = useState(false);
-
+    
     useEffect(() => {
         const getSessionAndFetchMonth = async () => {
             setLoading(true);
@@ -30,9 +30,16 @@ const Orders = () => {
         getSessionAndFetchMonth();
     }, [day.numb, month, year]);
 
-    if(loading) return <Spinner />
     return (
             <tbody>
+                {
+                    loading && (
+                    <tr>
+                        <td>
+                            <Spinner />
+                        </td>
+                    </tr>)
+                }
                 {orders && orders.length > 0 && orders.map((order, i) => {
                     const {dateReceived, whatReceived, customerNumber, receivedBy, amountToPay, cardOrCash, hour, whoMadeIt} = order;
                     return (
@@ -100,12 +107,14 @@ const Orders = () => {
                                 {hour}
                             </Typography>
                         </td>
-
-                        <Link href={`/editOrder/${order.customerNumber}`} passHref>
+                        <td className="p-4">
+                        <Link href={`/list/edit/${order._id}`} passHref>
                             <Typography as="span" variant="small" color="blue-gray" className="font-medium">
                             Edit
                             </Typography>
                         </Link>
+
+                        </td>
                     </tr>
                     )
                 })}

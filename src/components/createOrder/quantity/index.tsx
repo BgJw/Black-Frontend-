@@ -3,7 +3,7 @@ import { ChangeEventHandler, memo, useEffect, useState } from "react";
 
 interface IQuantity {
   item: ISelectedItem;
-  increaseItemCount: (id: number, quantity: string) => void;
+  increaseItemCount: (id: string, quantity: string) => void;
 }
 
 export const Quantity = memo(({item, increaseItemCount}: IQuantity) => {
@@ -16,7 +16,7 @@ export const Quantity = memo(({item, increaseItemCount}: IQuantity) => {
     if (inputValue === "" || /^(\d*\.?\d+|\d+\.?\d*|\d*\.?\d+)$/.test(inputValue)) {
         const newValue = inputValue === "0" ? "" : inputValue; 
         setQuantity(newValue);
-        increaseItemCount(item.id, newValue);
+        increaseItemCount(item._id, newValue);
     }
   }
   const decrementFloatNumber = (numb: string) => {
@@ -43,7 +43,7 @@ const incrementFloatNumber = (numb: string) => {
     }
 }
 
-useEffect( () => increaseItemCount(item.id, quantity), [quantity]);
+useEffect( () => increaseItemCount(item._id, quantity), [quantity]);
     
   return (
     <div className="max-w-xs ml-auto">

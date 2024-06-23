@@ -25,7 +25,7 @@ const SideBarItemTask:FC<ISelectedItemProps> = ({tasks, link, handleOpen}) => {
 
 
     return (
-        tasks.length && tasks.map(task => (
+        tasks.length > 0 && tasks.map(task => (
             <ListItem
                 key={task.link}
                 onClick={() => {router.push(link + task.link); setLoading(true)}}

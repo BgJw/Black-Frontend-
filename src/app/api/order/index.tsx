@@ -5,7 +5,7 @@ import { ApiResponse, SERVER_PORT, handleApiRequest } from "../handleApiRequest"
 const apiUrl = `${SERVER_PORT}/orders/`;
 
 export interface ISelectedItem {
-    id: number;
+    _id: string;
     price: string;
     name: string;
     numb: string;
@@ -30,6 +30,7 @@ export interface IList {
     whoMadeIt: string;
     hour: string;
     forWhen: string;
+    _id: string;
   }
 export interface ICreateOrder {
     day: number;
@@ -37,6 +38,7 @@ export interface ICreateOrder {
     year: number;
     department: string;
     orders: IList[];
+    _id: string;
 }
 
 export const addNewOrder = async (body: ICreateOrder):Promise<ApiResponse> => {    
@@ -87,3 +89,18 @@ export const incrementClientNumber = async () => {
 
 }
 
+export const getOrderbyId = async (day: number, month: number, year: number, department: string, _id: string ): Promise<IList | ApiResponse> => {
+  try {
+    const res = await fetch(`${apiUrl}${day}/${month+1}/${year}/${department}/${_id}`);
+    if(res.ok){
+      const data = await res.json();
+      
+      return await data;
+    } else {
+      return {success: false, message: res.statusText };
+    }
+    
+  } catch (error) {
+    return {success: false, message: String(error) };
+  }
+}

@@ -9,8 +9,8 @@ interface IItems {
 
 export const Items = memo(({selectedItems, setSelectedItems}: IItems) => {
 
-    const increaseItemCount = (id: number, quantity: string) => {
-        const index = selectedItems.findIndex((item) => item.id === id);
+    const increaseItemCount = (id: string, quantity: string) => {
+        const index = selectedItems.findIndex((item) => item._id === id);
         if (index !== -1) {
           const newItems = [...selectedItems];
           newItems[index].numb = quantity;
@@ -18,8 +18,8 @@ export const Items = memo(({selectedItems, setSelectedItems}: IItems) => {
         }
       };
        
-      const removeSelectedItems = (itemId: number) => {
-        const newList = selectedItems.slice().filter( items => items.id !== itemId)
+      const removeSelectedItems = (itemId: string) => {
+        const newList = selectedItems.slice().filter( items => items._id !== itemId)
         setSelectedItems( newList );
       };
       
@@ -38,7 +38,7 @@ export const Items = memo(({selectedItems, setSelectedItems}: IItems) => {
             selectedItems.map( item => (
               <SelectedItem 
                   item={item} 
-                  key={item.id} 
+                  key={item._id} 
                   increaseItemCount={increaseItemCount} 
                   removeSelectedItems={removeSelectedItems}
                   />
