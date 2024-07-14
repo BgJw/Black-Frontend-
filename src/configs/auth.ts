@@ -91,7 +91,7 @@ export const authConfig = {
     signIn: '/signIn',
     signOut: '/signIn',
   },
-  secret: 'supersecret',
+  secret: process.env.NEXTAUTH_SECRET || 'SECRETSUPER',
 };
 
 export default NextAuth(authConfig);
