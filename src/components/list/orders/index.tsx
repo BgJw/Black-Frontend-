@@ -30,7 +30,7 @@ const Orders = () => {
             }
         }
         getSessionAndFetchMonth();
-    }, [day.numb, month, year]);
+    }, [day.numb, month, year, data]);
 
     return (
             <tbody>

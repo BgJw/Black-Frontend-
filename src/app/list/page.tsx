@@ -1,7 +1,8 @@
+'use client'
 import ListHeader from '@/components/list/header';
 import ListTitle from '@/components/list/listTitle';
 import Orders from '@/components/list/orders';
-import { Card } from '@material-tailwind/react';
+import Card from '@material-tailwind/react/components/Card';
 
 import s from './list.module.scss';
 
