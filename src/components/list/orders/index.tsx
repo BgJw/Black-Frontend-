@@ -3,22 +3,24 @@
 import { IList, PaidMethod, getOrderByDay } from "@/app/api/order";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "@/hooks/store";
-import { fetchActiveSession } from "@/app/api/session";
 import { Chip, Spinner, Typography } from "@material-tailwind/react";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 const Orders = () => {
     const [orders, setOrders] = useState<IList[]>([]);
     const {day, month, year} = useAppSelector( state => state.listSlice );
     const [loading, setLoading] = useState(false);
-    
+    const {data} = useSession();
+
+
     useEffect(() => {
         const getSessionAndFetchMonth = async () => {
             setLoading(true);
             try {
-                const session = await fetchActiveSession();
-                if (session && session.username) {
-                    const res = await getOrderByDay(day.numb, month, year, session.username);
+                const username = data?.user?.name;
+                if (username) {
+                    const res = await getOrderByDay(day.numb, month, year, username);
                     setOrders(res);
                     setLoading(false);
                 }

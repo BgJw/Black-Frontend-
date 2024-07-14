@@ -1,3 +1,4 @@
+'use client'
 
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { nextMonth, prevMonth } from '../../../slices/scheduleSlice';

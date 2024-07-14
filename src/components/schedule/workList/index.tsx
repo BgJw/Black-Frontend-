@@ -7,22 +7,23 @@ import { fetchMonth } from "../../../slices/scheduleSlice";
 import { WorkHeader } from "../workHeader";
 import { WorkTimeTable } from "../workTimeTable";
 import Link from "next/link";
-import { fetchActiveSession } from "@/app/api/session";
 import { update } from "@/slices/notificationSlice";
 import { Spinner } from "@material-tailwind/react";
+import { useSession } from "next-auth/react";
 
 const ScheduleList = () => {
   const { month, year, status } = useAppSelector((store) => store.scheduleSlice);
   const dispatch = useAppDispatch();
-
+  const {data} = useSession();
+  
   useEffect(() => {
     const getSessionAndFetchMonth = async () => {
       try {
-        const session = await fetchActiveSession();
-        if (session && session.username) {
+        const username = data?.user?.name;
+        if (username) {
           dispatch(
             fetchMonth({
-              department: session.username,
+              department: username,
               month: month.name,
               year,
             })

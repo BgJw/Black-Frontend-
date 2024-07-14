@@ -20,7 +20,7 @@ export default function RootLayout({
             <body>
                 <Providers>
                     <Header />
-                    <div className='main'>
+                    <div className='main bg-white'>
                         <Sidebar />
                         {children}
                     </div>

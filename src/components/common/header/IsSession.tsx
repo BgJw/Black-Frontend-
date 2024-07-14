@@ -1,37 +1,23 @@
-'use client'
+'use client';
 
-import { fetchActiveSession } from "@/app/api/session";
 import { PowerIcon } from "@heroicons/react/24/solid";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { signOut, useSession,  } from "next-auth/react";
 
 const IsSession = () => {
-  const router = useRouter();
-  const [department, setDepartment] = useState('');
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    router.push('/signIn');
+  const {data} = useSession();
+  
+  
+
+  const handleLogout = async () => {
+    await signOut({ redirect: true });
   };
-
-  useEffect(() => {
-    const getSession = async () => {
-      try {
-        const data = await fetchActiveSession();
-        setDepartment(data.username);
-      } catch (error) {
-        console.error('Failed to fetch session:', error);
-      }
-    };
-
-    getSession();
-  }, []); 
 
   return (
     <div className="flex items-center justify-end md:gap-40 gap-20 md:text-sm text-xs ">
       <small className="leading-6">
         Zalogowany: 
-        {"  " + department}
+        {"  " + data?.user?.name}
       </small>
       <button
         onClick={handleLogout}
@@ -42,7 +28,7 @@ const IsSession = () => {
             </span>
       </button>
     </div>
-  )
+  );
 };
 
 export default IsSession;

@@ -61,7 +61,7 @@ const Sidebar = memo(() => {
     
     return (
         !isSignInPage && (
-            <div className="relative w-full h-full z-30 bg-opacity-60">
+            <div className="relative bg-transparent">
                 <IconButton variant="text" size="lg" onClick={isDrawerOpen ? closeDrawer : openDrawer}>
                     {isDrawerOpen ? (
                         <XMarkIcon className="h-8 w-8 stroke-2" />

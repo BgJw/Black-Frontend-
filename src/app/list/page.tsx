@@ -1,7 +1,5 @@
-'use client'
 import ListHeader from '@/components/list/header';
 import ListTitle from '@/components/list/listTitle';
-import withAuth from '@/components/withAuth';
 import Orders from '@/components/list/orders';
 import { Card } from '@material-tailwind/react';
 
@@ -23,4 +21,4 @@ const List = () => {
     );
 };
 
-export default withAuth(List);
+export default List;

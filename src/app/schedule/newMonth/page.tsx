@@ -13,8 +13,7 @@ import { addNewMonth } from '@/app/api/month';
 import { update } from '../../../slices/notificationSlice';
 import Notification from '@/components/notification';
 import useModal from '@/hooks/useModal';
-import withAuth from '@/components/withAuth';
-import { fetchActiveSession } from '@/app/api/session';
+import { useSession } from 'next-auth/react';
 
 const NewMonth = () => {
     const currentYear = useAppSelector(state => state.scheduleSlice.year);
@@ -22,8 +21,8 @@ const NewMonth = () => {
     const [month, setMonth] = useState('');
     const [employees, setEmployees] = useState<Partial<IEmployees>[]>([]);
     const {isOpen, openModal, closeModal } = useModal();
+    const {data} = useSession();
     const dispatch = useAppDispatch();
-
     
 
 
@@ -45,15 +44,12 @@ const NewMonth = () => {
     }
 
     const fetchNewMonth = async () => {
-        const department = await fetchActiveSession();
-        if (!department) {
+        if (!data?.user?.name) {
             dispatch(update('Nie znaleziono sesji'));
             return;
         }
-
-        
         const newMonth: Partial<IPersonel> = {
-            department: department.username,
+            department: data.user.name,
             employees: employees as IEmployees[],
             month: month,
             year: Number(year),
@@ -115,5 +111,5 @@ const NewMonth = () => {
     );
 };
 
-export default withAuth(NewMonth);
+export default NewMonth;
 

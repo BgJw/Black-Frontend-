@@ -1,7 +1,3 @@
-'use client'
-
-import withAuth from "@/components/withAuth";
-
 
 const EditOrder = () => {
     return (
@@ -12,4 +8,4 @@ const EditOrder = () => {
 };
 
 
-export default withAuth(EditOrder);
+export default EditOrder;

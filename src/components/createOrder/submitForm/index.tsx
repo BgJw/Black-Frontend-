@@ -1,8 +1,8 @@
 import { IList, addNewOrder, incrementClientNumber } from "@/app/api/order";
-import { fetchActiveSession } from "@/app/api/session";
 import { useAppDispatch } from "@/hooks/store";
 import { update } from "@/slices/notificationSlice";
 import { Button } from "@material-tailwind/react";
+import { useSession } from "next-auth/react";
 
 
   const namePropsOrder = {
@@ -26,7 +26,7 @@ import { Button } from "@material-tailwind/react";
 
 export const SubmitForm = ({newOrder,  resetAll}: {newOrder: IList, resetAll: () => void}) => {
   const dispatch = useAppDispatch();
-
+  const {data} = useSession();
     const sendDate = async (newOrder: IList) => {
       const {dateReceived, whatReceived, customerNumber, receivedBy, amountToPay, paid, cardOrCash, hour, forWhen, whoMadeIt, _id } = newOrder
 
@@ -63,10 +63,9 @@ export const SubmitForm = ({newOrder,  resetAll}: {newOrder: IList, resetAll: ()
       const day = +forWhen.split('/')[0];
       const month = +forWhen.split('/')[1];
       const year = +forWhen.split('/')[2];
-      const {username} = await fetchActiveSession();
 
       const body = {
-        department: username,
+        department: String(data?.user?.name),
         day,
         month,
         year,

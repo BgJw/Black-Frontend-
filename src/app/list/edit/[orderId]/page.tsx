@@ -1,8 +1,8 @@
 'use client'
 
 import { IList, getOrderbyId } from '@/app/api/order';
-import { fetchActiveSession } from '@/app/api/session';
 import { useAppSelector } from '@/hooks/store';
+import { useSession } from 'next-auth/react';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -10,15 +10,16 @@ const OrderId = () => {
     const params = useParams();
     const [order, setOrder] = useState<IList>();
     const {day, month, year} = useAppSelector( state => state.listSlice );
+    const {data} = useSession();
 
     const fetchOrderById = async () => {
-        const department = await fetchActiveSession();
-        if (!department) {
+        if (!data?.user?.name) {
             return;
         }
-        await getOrderbyId(day.numb, month, year, department.username, String(params.orderId))
+        await getOrderbyId(day.numb, month, year, data.user.name, String(params.orderId))
             .then( (res) => {setOrder(res as IList)});
     }
+
     useEffect( () => {
         fetchOrderById()
 

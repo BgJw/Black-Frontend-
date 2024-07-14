@@ -11,7 +11,6 @@ import { SubmitForm } from "@/components/createOrder/submitForm";
 import { TotalPrice } from "@/components/createOrder/totalPrice";
 import { getDates } from "@/helpers/isWeekend";
 import { ISelectedItem, PaidMethod, fetchClientNumber } from "../api/order";
-import withAuth from "@/components/withAuth";
 import { Button } from "@material-tailwind/react";
 import { StepperWithDots } from "@/components/steper";
 
@@ -229,4 +228,4 @@ const Orders: FC = () => {
   )
 };
 
-export default withAuth(Orders);
+export default Orders;
