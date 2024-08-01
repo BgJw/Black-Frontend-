@@ -14,7 +14,7 @@ const SideBarItemTask:FC<ISelectedItemProps> = ({tasks, link, handleOpen}) => {
     const pathName = usePathname();
     const router = useRouter();
     const [loading, setLoading] = useState(false);
-
+    
     useEffect( () => {
         setLoading(false)
     }, [pathName])

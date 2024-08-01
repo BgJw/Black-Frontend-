@@ -14,12 +14,13 @@ import { useSession } from "next-auth/react";
 const ScheduleList = () => {
   const { month, year, status } = useAppSelector((store) => store.scheduleSlice);
   const dispatch = useAppDispatch();
-  const {data} = useSession();
+  const { data: session, status: sessionStatus } = useSession();
+
   
   useEffect(() => {
     const getSessionAndFetchMonth = async () => {
       try {
-        const username = data?.user?.name;
+        const username = session?.user?.name;
         if (username) {
           dispatch(
             fetchMonth({
@@ -30,25 +31,29 @@ const ScheduleList = () => {
           );
         } else {
           console.error("Error retrieving profile data");
-          dispatch(update("Error retrieving profile data please restart your application"))
+          dispatch(update("Error retrieving profile data, please restart your application"));
         }
       } catch (error) {
         console.error("Error retrieving profile data", error);
+        dispatch(update("Error retrieving profile data, please restart your application"));
       }
     };
 
-    getSessionAndFetchMonth();
-  }, [dispatch, month, year]);
+    if (sessionStatus === "authenticated") {
+      getSessionAndFetchMonth();
+    }
+  }, [dispatch, month, year, session, sessionStatus]);
   
   return (
-    <div className="relative p-3">
+    <div className="relative ">
       {status === Status.idle && (
-        <div className="rounded-lg shadow-md overflow-x-auto">
-            <table className="w-full text-sm rtl:text-right text-gray-500">
+        <div className="rounded-lg shadow-md overflow-x-auto flex justify-center">
+            <table className="sm:w-[60%] text-sm rtl:text-right text-gray-500">
               <WorkHeader />
               <WorkTimeTable />
             </table>
         </div>
+        
       )}
         {status === Status.loading && (
           <div className="flex justify-center items-center">

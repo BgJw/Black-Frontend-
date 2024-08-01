@@ -27,6 +27,7 @@ import { useSession } from "next-auth/react";
 export const SubmitForm = ({newOrder,  resetAll}: {newOrder: IList, resetAll: () => void}) => {
   const dispatch = useAppDispatch();
   const {data} = useSession();
+  
     const sendDate = async (newOrder: IList) => {
       const {dateReceived, whatReceived, customerNumber, receivedBy, amountToPay, paid, cardOrCash, hour, forWhen, whoMadeIt, _id } = newOrder
 

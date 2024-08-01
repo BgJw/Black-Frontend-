@@ -2,13 +2,13 @@
 import { useAppSelector } from '@/hooks/store';
 import useDaysArrayInMonth from '@/hooks/useDaysArrayInMonth';
 import { getDayOfWeek } from '@/helpers/isWeekend';
-import React from 'react'
+import React, { Suspense } from 'react'
 import dynamic from 'next/dynamic';
+import { Spinner } from '@material-tailwind/react';
 
 
-const DynamicWorkCell = dynamic( () => import('../workCell'), {
-  loading: () => <td>Loading...</td>,
-})
+const DynamicWorkCell = dynamic( () => import('../workCell'));
+
 export const WorkTimeTable = () => {
     const { month, year, personel } = useAppSelector(store => store.scheduleSlice);
     const daysInMonth = useDaysArrayInMonth();
@@ -23,13 +23,15 @@ export const WorkTimeTable = () => {
                 </th>
                 {
                     personel.employees && personel.employees.map(emplo => (
+                      <Suspense fallback={<td><Spinner /></td>} key={emplo._id}>
                         <DynamicWorkCell
                             key={emplo._id}
                             employeeId={emplo._id}
                             monthId={personel._id}
                             emptyDay={day}
                             workTime={emplo.work_time.find(workDay => workDay.day === day)}
-                    />
+                        />
+                      </Suspense>
                     ))
                 }
             </tr>

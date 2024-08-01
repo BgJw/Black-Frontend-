@@ -15,6 +15,7 @@ const DynamicModalRemoveEmployee = dynamic(() => import('../modals/RemoveEmploye
     loading: () => <p>Loading...</p>,
 });
 
+const styleTooltip = "border rounded-md border-blue-gray-50 bg-white px-2 py-2 shadow-xl shadow-black/10 text-black text-xs";
 
 const IconControls = () => {
     const dispatch = useAppDispatch();
@@ -22,7 +23,6 @@ const IconControls = () => {
     const removeEmployeeModal = useModal();
     const status = useAppSelector(state => state.scheduleSlice.status);
 
-    const styleTooltip = "border rounded-md border-blue-gray-50 bg-white px-2 py-2 shadow-xl shadow-black/10 text-black text-xs";
 
     return (
         <>

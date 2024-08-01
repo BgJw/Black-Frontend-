@@ -11,7 +11,7 @@ const ListHeader = () => {
     const lessTenMonth = (month + 1) < 10 ? 0 + '' + (month + 1) : month;
     
     return (
-        <header className='flex w-1/2 justify-between items-center '>
+        <header className='flex w-[85%] md:w-1/2 justify-between items-center '>
                 <button
                     className="hover:opacity-70"
                     onClick={ () => dispatch(prevDay()) }

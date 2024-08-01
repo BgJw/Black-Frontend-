@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Typography, Input, Button } from '@material-tailwind/react';
+import { Typography, Input, Button, Spinner } from '@material-tailwind/react';
 import { EyeSlashIcon, EyeIcon } from '@heroicons/react/24/solid';
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
@@ -11,6 +11,7 @@ const SignIn = () => {
   const [password, setPassword] = useState('');
   const [passwordShown, setPasswordShown] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const togglePasswordVisiblity = () => setPasswordShown((cur) => !cur);
@@ -20,17 +21,23 @@ const SignIn = () => {
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
     setError(null);
+    setLoading(true);
 
     const res = await signIn('credentials', {
       redirect: false,
       name: department,
       password: password,
+      callbackUrl: '/'
     });
 
-    if (res?.ok) {      
+
+    if (res?.ok) {  
+      setLoading(false);   
       router.push('/');
     } else {
+      setLoading(false);
       setError('Invalid credentials');
     }
   };
@@ -88,8 +95,8 @@ const SignIn = () => {
                 {passwordShown ? <EyeIcon className="h-5 w-5" /> : <EyeSlashIcon className="h-5 w-5" />}
               </i>} crossOrigin={undefined}            />
           </div>
-          <Button color="gray" size="lg" className="p-4" fullWidth type="submit">
-            Sign In
+          <Button color="gray" size="lg" className="p-4 flex items-center justify-center h-12" fullWidth type="submit" disabled={loading}>
+            { loading ? <Spinner />: 'Sign In'}
           </Button>
         </form>
         {error && <p className="p-2 font-bold text-red-600">{error}</p>}

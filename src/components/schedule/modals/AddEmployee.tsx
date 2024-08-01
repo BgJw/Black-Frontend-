@@ -52,7 +52,7 @@ const AddEmployee = React.memo(({ changeModal }: IModal) => {
             X
         </Button>
           <h3 className="text-center text-2xl font-bold text-gray-900 mb-6 mt-2">Dodaj nowego pracownika</h3>
-          <CreateEmployee addEmployee={handleAddEmployee} />
+          <CreateEmployee addEmployee={handleAddEmployee} isOpen={true} />
       </div>
     </div>
   );

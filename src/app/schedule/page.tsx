@@ -8,9 +8,11 @@ import Notification from '@/components/notification';
 const Schedule = () => {
 
     return (
-        <div className="grid place-items-center grid-rows-[70px,50px,minmax(100px,1fr)] flex-col items-start overflow-x-auto relative w-full gap-y-4 mx-auto">
-            <Header />
-            <IconControls />
+        <div className="overflow-x-auto relative w-full">
+            <div className='grid justify-items-center gap-2 mb-4'>
+                <Header />
+                <IconControls />
+            </div>
             <WorkList />
             <Notification />
         </div>

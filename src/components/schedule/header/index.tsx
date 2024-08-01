@@ -10,7 +10,7 @@ const Header = () => {
 
     return (
             <header 
-                className="flex justify-between items-center lg:w-[60%] lg:text-base text-xs pt-6" 
+                className="flex justify-between items-center w-[85%] md:w-1/2 lg:text-base text-xs pt-6 mt-2" 
                 >
                 <button
                     className="hover:opacity-70"

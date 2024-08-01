@@ -21,7 +21,8 @@ const Sidebar = memo(() => {
     const isSignInPage = pathName === '/signIn';
 
     const handleOpen = (link: string) => {
-        setOpen(open === link ? '' : link);
+        // update 
+        setOpen(link);
     };
      
     const openDrawer = () => setIsDrawerOpen(true);
@@ -40,6 +41,7 @@ const Sidebar = memo(() => {
         ))
     ), [links, open]);
 
+// useEffect from resize if offsedWindows < 760 
     useEffect(() => {
         const handleResize = () => {
             const isSmallScreen = window.innerWidth <= 768;
