@@ -3,7 +3,10 @@ import { Providers } from '@/components/Providers'
 import { ReactNode } from 'react'
 import Header from '@/components/common/header'
 import Sidebar from '@/components/common/sidebar'
+import Notification from '@/components/notification'
+
 import './globals.scss'
+
 
 export const metadata: Metadata = {
     title: 'Black Laundry',
@@ -17,13 +20,14 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body>
+            <body className='relative'>
                 <Providers>
                     <Header />
                     <div className='main bg-white'>
                         <Sidebar />
                         {children}
                     </div>
+                    <Notification />
                 </Providers>
             </body>
         </html>

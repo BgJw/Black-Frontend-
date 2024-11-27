@@ -1,7 +1,6 @@
 import Header from '@/components/schedule/header';
 import WorkList from '@/components/schedule/workList';
 import IconControls from '@/components/schedule/iconControls';
-import Notification from '@/components/notification';
 
 
 
@@ -14,7 +13,6 @@ const Schedule = () => {
                 <IconControls />
             </div>
             <WorkList />
-            <Notification />
         </div>
     );
 };

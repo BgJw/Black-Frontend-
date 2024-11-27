@@ -1,4 +1,5 @@
 'use client';
+
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/store";
 import { removeText } from "../../slices/notificationSlice";
@@ -10,6 +11,7 @@ const Notification = () => {
 
     useEffect(() => {
         let timer: NodeJS.Timeout;
+        
         if (message.length > 0) {
             setAnimation(true);
 
@@ -20,14 +22,13 @@ const Notification = () => {
         }
 
         return () => clearTimeout(timer);
-    }, [message, dispatch]);
+    }, [message, dispatch, animation]);
 
     return (
         <>
-            {message.length > 0 && (
                 <div
                     className={`fixed right-3 md:w-full max-w-xs p-2 text-gray-500 bg-white rounded-lg shadow-lg dark:bg-gray-800 dark:text-gray-400 z-50 transition-all duration-1000  ${
-                        animation ? 'top-20' : 'top-0'
+                        animation ? 'top-20' : '-top-20'
                     }`}
                     role="alert"
                 >
@@ -56,7 +57,6 @@ const Notification = () => {
                         </div>
                     </div>
                 </div>
-            )}
         </>
     );
 };

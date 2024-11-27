@@ -8,7 +8,6 @@ import MySelect from '@/components/mySelect';
 import { monthNames } from '../../../slices/scheduleSlice';
 import { addNewMonth } from '@/app/api/month';
 import { update } from '../../../slices/notificationSlice';
-import Notification from '@/components/notification';
 import useModal from '@/hooks/useModal';
 import { useSession } from 'next-auth/react';
 import AddEmployeeButton from '@/components/newMonth/AddEmployeeButton';
@@ -74,7 +73,6 @@ const NewMonth = () => {
     return (
         <div className='sm:m-auto md:m-0 flex flex-col items-center relative'>
             <Header />
-            <Notification />
             <div className='mb-2 flex items-center justify-center relative' >
                 <div className='grid gap-4 md:grid-cols-2 justify-items-center'>
                     <MyInput name={'Rok'} setValue={setYear} value={year} />
