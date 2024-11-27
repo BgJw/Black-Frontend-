@@ -40,7 +40,7 @@ export const authConfig = {
         }
 
         try {
-          const response = await fetch('https://black.adaptable.app/auth/login', {
+          const response = await fetch('https://black-back.adaptable.app/auth/login', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
