@@ -44,8 +44,8 @@ const SignIn = () => {
 
   return (
     <section className="absolute top-0 right-0 left-0 bottom-0 grid text-center items-center p-8">
-      <aside className="absolute right-0 -top-14 rounded-md border p-2 text-left text-xs md:text-sm">
-        <h2 className="text-center">Test</h2>
+      <aside className="absolute left-0 md:left-8 -top-14 md:-top-8 rounded-md border-2 p-2 text-left text-xs md:text-sm bg-slate-200">
+        <h2 className="text-center">Test login</h2>
         <p>Department: Zaspa</p>
         <p>Password: password</p>
       </aside>
