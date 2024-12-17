@@ -16,9 +16,6 @@ const SignIn = () => {
 
   const togglePasswordVisiblity = () => setPasswordShown((cur) => !cur);
   
-
-
-  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -73,7 +70,8 @@ const SignIn = () => {
               className="w-full placeholder:opacity-100 focus:border-t-primary border-t-blue-gray-200"
               labelProps={{
                 className: 'hidden',
-              }} crossOrigin={undefined}            />
+              }} crossOrigin={undefined}
+            />
           </div>
           <div className="mb-6">
             <label htmlFor="password">

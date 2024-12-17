@@ -1,4 +1,4 @@
-import { Typography } from "@material-tailwind/react";
+import { Typography } from "@material-tailwind/react/components/Typography";
 
 const LIST_HEAD = ['№', 'Data przyjęcia', 'Co przyjęte', 'Nr klienta', 'Kto przyjąl', 'Kwota', 'Status opłaty', 'Kto zrobił', 'Godzina'];
 

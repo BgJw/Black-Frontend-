@@ -26,8 +26,6 @@ const NewMonth = () => {
     const {data} = useSession();
     const dispatch = useAppDispatch();
     
-
-
     const handleAddEmployee = (name: string, position: string) => {
         const employee: Partial<IEmployees> = {
             hours_worked: 0,
