@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import { Providers } from '@/components/Providers'
-import { ReactNode } from 'react'
+import { lazy, ReactNode } from 'react'
 import Header from '@/components/common/header'
 import Sidebar from '@/components/common/sidebar'
-import Notification from '@/components/notification'
+// import Notification from '@/components/notification'
+const LazyNotification = lazy(() => import('@/components/notification'));
 
 import './globals.scss'
 
@@ -27,7 +28,7 @@ export default function RootLayout({
                         <Sidebar />
                         {children}
                     </div>
-                    <Notification />
+                    <LazyNotification />
                 </Providers>
             </body>
         </html>
