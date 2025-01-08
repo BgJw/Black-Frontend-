@@ -20,9 +20,7 @@ export const useOrderState = () => {
   const updateField = useCallback(
     (field: keyof typeof customerData, value: any) => {
       setCustomerData((prev) => ({ ...prev, [field]: value }));
-    },
-    []
-  );
+    },[]);
 
   const resetAll = useCallback(async () => {
     setNextStep(0);

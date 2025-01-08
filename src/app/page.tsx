@@ -5,7 +5,7 @@ const Home = () =>  {
  
   return (
       <main >
-        <BackgroundVideo />
+        {/* <BackgroundVideo /> */}
         <div className="h-screen w-full z-10 flex justify-center items-center relative delay-2000 duration-500 transition-all">
           <div>
             <h1 className="text-[40px]">
