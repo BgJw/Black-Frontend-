@@ -33,7 +33,7 @@ const IconControls = () => {
                 removeEmployeeModal.isOpen && <DynamicModalRemoveEmployee changeModal={removeEmployeeModal.closeModal} />
             }
             {
-                status === Status.idle && 
+                (status === Status.idle || status === Status.notFound) && 
             <center className="flex justify-end items-center h-10 gap-3 relative">
                 <Tooltip content="Wrocić do aktualnego mięsiąca" className={styleTooltip}>
                     <button
