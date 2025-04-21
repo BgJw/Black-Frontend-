@@ -4,15 +4,11 @@ import MainContent from "@/components/createOrder/mainContent";
 
 
 
-const Orders: FC = () => {
-  
-      
+const Orders: FC = () => {   
   return (
     <div className="w-full relative mb-2">
       <Header />
       <MainContent />
     </div>
-  )
-};
-
+  )};
 export default Orders;

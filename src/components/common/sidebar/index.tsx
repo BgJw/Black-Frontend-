@@ -50,12 +50,9 @@ const Sidebar = memo(() => {
                 setIsDrawerOpen(false);
             } else {
                 setIsDrawerOpen(true);
-            }
-        };
-
+            }};
         handleResize();
         window.addEventListener('resize', handleResize);
-
         return () => {
             window.removeEventListener('resize', handleResize);
         };

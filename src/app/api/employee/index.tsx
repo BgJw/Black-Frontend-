@@ -20,10 +20,8 @@ export const addWorkDay = async (monthId: string, employeeId: string, emptyDay: 
 
 };
 export const changeMonthWorkTime = async (monthId: string, employee: IEmployees[]) => {
-    const url = `${apiUrl}${monthId}`;
-    
+    const url = `${apiUrl}${monthId}`; 
     return await handleApiRequest(url, 'PATCH', employee);
-
 };
 
 export const addNewEmployee = async (monthId: string, newEmployee: Partial<IEmployees>) => {

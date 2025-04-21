@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useEffect } from "react";
+import { useEffect } from "react";
 import { Status } from "../../../slices/types";
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
 import { fetchMonth } from "../../../slices/scheduleSlice";

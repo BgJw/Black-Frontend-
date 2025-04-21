@@ -3,7 +3,7 @@ import { DefaultUser } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-
+const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 declare module 'next-auth' {
     interface Session {
@@ -40,7 +40,7 @@ export const authConfig = {
         }
 
         try {
-          const response = await fetch('https://black-back.adaptable.app/auth/login', {
+          const response = await fetch(`${API_URL}/auth/login`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

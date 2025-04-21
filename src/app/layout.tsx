@@ -3,7 +3,6 @@ import { Providers } from '@/components/Providers'
 import { lazy, ReactNode } from 'react'
 import Header from '@/components/common/header'
 import Sidebar from '@/components/common/sidebar'
-// import Notification from '@/components/notification'
 const LazyNotification = lazy(() => import('@/components/notification'));
 
 import './globals.scss'

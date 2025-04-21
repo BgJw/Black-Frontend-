@@ -93,13 +93,7 @@ export const SubmitForm = ({newOrder,  resetAll}: {newOrder: IList, resetAll: ()
           incrementClientNumber();
           dispatch(update(res.message));
           resetAll();
-        }
-        
-      });
-
-    }
-
-  }
+        }});}}
 
   return (
     <Button
