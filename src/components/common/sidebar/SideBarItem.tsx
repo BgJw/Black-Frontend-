@@ -3,7 +3,7 @@ import { Accordion, AccordionHeader, AccordionBody, List, ListItem, ListItemPref
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
-import { FC, MouseEvent, useEffect, useState } from 'react';
+import { FC, memo, MouseEvent, useCallback, useEffect, useState } from 'react';
 import Icons from './Icons';
 import SideBarItemTask from "./SideBarItemTask";
 
@@ -22,22 +22,22 @@ const SidebarItem: FC<SidebarItemProps> = ({ link, name, tasks, open, handleOpen
     const activeLink = pathName === link;
     
     
-    const nextPage = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>, link: string) => {
+    const nextPage = useCallback((e: MouseEvent<HTMLButtonElement>, link: string) => {
         e.stopPropagation();
-        if(activeLink){
-            handleOpen(link);
-        } else {
+        if (!activeLink) {
+            setLoading(true);
             router.push(link);
-            setLoading(true)
-        }
-    }
-
-    useEffect( () => {
-        if(activeLink){
+        } else {
             handleOpen(link);
-            setLoading(false)
         }
-    }, [link, pathName])
+    }, [activeLink, link, router, handleOpen]);
+
+    useEffect(() => {
+        if (activeLink) {
+            handleOpen(link);
+            setLoading(false);
+        }
+    }, [activeLink, link, handleOpen]);
 
 
     return (
@@ -62,7 +62,7 @@ const SidebarItem: FC<SidebarItemProps> = ({ link, name, tasks, open, handleOpen
                     <ListItemPrefix>
                         <Icons name={link} />
                     </ListItemPrefix>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 w-20">
                         <span className="mr-1 font-normal sm:text-sm text-xs whitespace-nowrap overflow-hidden text-ellipsis">
                             {name}
                         </span>
@@ -83,4 +83,4 @@ const SidebarItem: FC<SidebarItemProps> = ({ link, name, tasks, open, handleOpen
     );
 };
 
-export default SidebarItem;
+export default memo(SidebarItem);

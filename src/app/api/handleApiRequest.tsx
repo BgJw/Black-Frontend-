@@ -3,7 +3,6 @@ export interface ApiResponse {
      message: string
 };
 export const SERVER_PORT = process.env.NEXT_PUBLIC_API_URL;
-// export const SERVER_PORT = "http://localhost:5000";
 
 const handleResponse = async (response: Response): Promise<ApiResponse> => {
     if (!response.ok) {
