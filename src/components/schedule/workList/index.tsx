@@ -36,7 +36,7 @@ useEffect(() => {
 
   
   return (
-    <div className="relative ">
+    <div className="relative">
       {status === Status.idle && (
         <div className="rounded-lg shadow-md overflow-x-auto flex justify-center">
             <table className="sm:w-[60%] text-sm rtl:text-right text-gray-500">
@@ -44,7 +44,6 @@ useEffect(() => {
               <WorkTimeTable />
             </table>
         </div>
-        
       )}
       <StatusMessage status={status} month={month.name} year={year}/>
     </div>

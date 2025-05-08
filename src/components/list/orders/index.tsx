@@ -6,13 +6,15 @@ import { useAppSelector } from "@/hooks/store";
 import { Chip, Spinner, Typography } from "@material-tailwind/react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import { getMockSingleList } from "@/mocks/mockOrders";
+
+
 
 const Orders = () => {
     const [orders, setOrders] = useState<IList[]>([]);
     const {day, month, year} = useAppSelector( state => state.listSlice );
     const [loading, setLoading] = useState(false);
     const {data} = useSession();
-
 
     useEffect(() => {
         const getSessionAndFetchMonth = async () => {
@@ -21,7 +23,14 @@ const Orders = () => {
                 const username = data?.user?.name;
                 if (username) {
                     const res = await getOrderByDay(day.numb, month, year, username);
-                    setOrders(res);
+
+                    if (Object.keys(res).length === 0) {
+                        const mockData = getMockSingleList(day.numb, month, year);
+                        setOrders(mockData);    
+                        console.log(orders);                 
+                    } else {
+                        setOrders(res);
+                    }
                     setLoading(false);
                 }
             } catch (error) {
@@ -90,12 +99,13 @@ const Orders = () => {
                                 variant="filled"
                                 value={cardOrCash}
                                 color={
-                                    (cardOrCash === PaidMethod.Card) || (cardOrCash === PaidMethod.Cash) 
-                                    ? 
-                                    "green" 
-                                    :  
-                                    "cyan"
-                                }
+                                    cardOrCash === PaidMethod.Card
+                                      ? "green" 
+                                      : cardOrCash === PaidMethod.Cash
+                                      ? "blue"   
+                                      : "cyan"   
+                                  }
+                                  
                                 />
                             </div>
                         </td>
