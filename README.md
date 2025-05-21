@@ -12,7 +12,7 @@
 
 - **Next.js**: A React framework for production.
 - **TypeScript**: A superset of JavaScript that adds static typing.
-- **Redux**: A predictable state container for JavaScript apps.
+- **Redux Toolkit**: A predictable state container for JavaScript apps.
 - **Tailwind CSS**: A utility-first CSS framework.
 - **Material Tailwind**: Material Design components for Tailwind CSS.
 - **Heroicons**: Beautiful hand-crafted SVG icons.

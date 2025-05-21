@@ -10,7 +10,7 @@ const Home = () =>  {
           <div>
             <h1 className="text-[40px]">
               Witamy w Pralnia do domu
-
+            
             </h1>
           </div>
         </div>

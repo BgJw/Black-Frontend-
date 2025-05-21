@@ -72,24 +72,35 @@ export const authConfig = {
       },
     }),
   ],
-  callbacks: {
-    async jwt({ token, user }: { token: JWT; user?: User }): Promise<JWT> {
-        
-      if (user) {
-        token.accessToken = user.token;
-        token.name = user.username;
-      }
-      
-      return token;
-    },
-    async session({ session, token }: { session: Session; token: JWT }): Promise<Session> {
-      session.accessToken = token.accessToken as string;      
-      return session;
+callbacks: {
+  async jwt({ token, user }: { token: JWT; user?: User }): Promise<JWT> {
+    if (user) {
+      token.accessToken = user.token;
+      token.name = user.username;
+    }
+    return token;
   },
+
+  async session({ session, token }: { session: Session; token: JWT }): Promise<Session> {
+    session.accessToken = token.accessToken as string;
+    return session;
   },
+
+async redirect({ url, baseUrl }: { url: string; baseUrl: string }): Promise<string>
+{
+    if (url.startsWith(baseUrl + '/sign-in')) {
+      return baseUrl;
+    }
+    if (url.startsWith(baseUrl)) {
+      return url;
+    }
+    return baseUrl;
+  },
+}
+,
   pages: {
-    signIn: '/signIn',
-    signOut: '/signIn',
+    signIn: '/sign-in',
+    signOut: '/sign-in',
   },
   secret: process.env.NEXTAUTH_SECRET || 'supersecret',
 };

@@ -27,7 +27,6 @@ const Orders = () => {
                     if (Object.keys(res).length === 0) {
                         const mockData = getMockSingleList(day.numb, month, year);
                         setOrders(mockData);    
-                        console.log(orders);                 
                     } else {
                         setOrders(res);
                     }

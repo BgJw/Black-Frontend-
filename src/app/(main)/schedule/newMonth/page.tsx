@@ -1,16 +1,16 @@
 'use client'
 import { lazy, Suspense, useState } from 'react';
-import { IEmployees, IPersonel } from '../../../slices/types';
 import Header from '@/components/newMonth/Header';
 import MyInput from '@/components/myInput';
 import { useAppDispatch, useAppSelector } from '@/hooks/store';
 import MySelect from '@/components/mySelect';
-import { monthNames } from '../../../slices/scheduleSlice';
 import { addNewMonth } from '@/app/api/month';
-import { update } from '../../../slices/notificationSlice';
 import useModal from '@/hooks/useModal';
 import { useSession } from 'next-auth/react';
 import AddEmployeeButton from '@/components/newMonth/AddEmployeeButton';
+import { update } from '@/slices/notificationSlice';
+import { IEmployees, IPersonel } from '@/slices/types';
+import { monthNames } from '@/slices/scheduleSlice';
 
 const CreateEmployee = lazy(() => import('@/components/newMonth/CreateEmployee'));
 const ListsNewEmployee = lazy(() => import('@/components/newMonth/ListsNewEmployee'));

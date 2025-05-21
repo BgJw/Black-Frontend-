@@ -4,7 +4,6 @@ import { IconButton, List, Drawer } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { memo, useCallback, useEffect, useState } from 'react';
 import SidebarItem from './SideBarItem';
-import { usePathname } from "next/navigation";
 
 const links = [
     { link: '/createOrder', name: 'Nowe zamówienie', tasks: [] }, 
@@ -16,9 +15,7 @@ const Sidebar = () => {
     const [open, setOpen] = useState('');
     const [isDrawerOpen, setIsDrawerOpen] = useState(true);
     const [offsetWindow, setOffSetWindow] = useState<boolean>(false);
-    const pathName = usePathname();
 
-    const isSignInPage = pathName === '/signIn';
 
     const handleOpen = useCallback((link: string) => {
         setOpen(link);
@@ -44,7 +41,6 @@ const Sidebar = () => {
         };
     }, []);
 
-    if (isSignInPage) return null;
     
     return (
             <div className="relative bg-transparent">

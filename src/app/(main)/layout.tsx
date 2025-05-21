@@ -4,8 +4,8 @@ import { lazy, ReactNode } from 'react'
 import Header from '@/components/common/header'
 import Sidebar from '@/components/common/sidebar'
 const LazyNotification = lazy(() => import('@/components/notification'));
+import '@/app/globals.scss';
 
-import './globals.scss'
 
 
 export const metadata: Metadata = {
@@ -23,7 +23,7 @@ export default function RootLayout({
             <body className='relative'>
                 <Providers>
                     <Header />
-                    <div className='main bg-white'>
+                    <div className='main bg-white pt-[70px]'>
                         <Sidebar />
                         {children}
                     </div>
