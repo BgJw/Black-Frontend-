@@ -3,7 +3,8 @@ import { DefaultUser } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL
+const API_URL = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
+
 
 declare module 'next-auth' {
     interface Session {
